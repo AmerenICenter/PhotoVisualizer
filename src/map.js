@@ -118,12 +118,23 @@ function mapPopulate() {
     }
 }
 
+// ----------------------------------------------------------------
+// mapConvertDMS - converts degree-minute-second GPS coordinates
+//                 to decimal format
+// @param dms - [degrees, minutes, seconds] Number array
+// @param ref - bearing: "N", "S", "E", or "W"
+// ----------------------------------------------------------------
+
+function mapConvertDMS(dms, ref) {
+    val decGPS = dms[0].valueOf() + dms[1].valueOf() / 60 + dms[2].valueOf() / 3600;
+    if (ref == "S" || ref == "W") {
+        decGPS *= -1;
+    }
+    return decGPS;
+}
+
 // MARK: - Script
 if (DEBUG) {
     console.log("yes hello");
     mapLoadTestImages();
-}
-
-function namespaceTest() {
-    console.log("Ok, all this should work.");
 }
