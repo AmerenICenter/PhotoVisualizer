@@ -84,23 +84,21 @@ function initMap() {
 
 function mapReadImageMetadata(image) {
     console.log("Image metadata invoked.");
-    if (imageHasData(image)) {
-        EXIF.getData(image, function () {
-            var lat = EXIF.getTag(this, "GPSLatitude");
-            var latRef = EXIF.getTag(this, "GPSLatitudeRef");
-            var lng = EXIF.getTag(this, "GPSLongitude");
-            var lngRef = EXIF.getTag(this, "GPSLongitudeRef");
-            // Image metadata has all requested tags in expected format
-            if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
-                (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
-                var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
-                var n = mapMarkers.length;
-                mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1);
-                mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1);
-                mapMarkers.push(photoLocation);
-            }
-        });
-    }
+    EXIF.getData(image, function () {
+        var lat = EXIF.getTag(this, "GPSLatitude");
+        var latRef = EXIF.getTag(this, "GPSLatitudeRef");
+        var lng = EXIF.getTag(this, "GPSLongitude");
+        var lngRef = EXIF.getTag(this, "GPSLongitudeRef");
+        // Image metadata has all requested tags in expected format
+        if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
+            (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
+            var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
+            var n = mapMarkers.length;
+            mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1);
+            mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1);
+            mapMarkers.push(photoLocation);
+        }
+    });
     mapProcessImageCounter++;
     // All images have been processed
     if (mapProcessImageCounter == mapImgElements.length) {
