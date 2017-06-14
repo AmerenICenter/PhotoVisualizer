@@ -119,5 +119,6 @@ function mapPopulate() {
 
 // MARK: - Script
 if (DEBUG) {
+    console.log("yes hello");
     mapLoadTestImages();
 }
