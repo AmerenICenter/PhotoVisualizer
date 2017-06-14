@@ -118,6 +118,6 @@ function mapPopulate() {
 }
 
 // MARK: - Script
-if (debug) {
+if (DEBUG) {
     mapLoadTestImages();
 }
