@@ -116,3 +116,8 @@ function mapPopulate() {
         mapMarkers.push(new google.maps.Marker({position: mapMarkers[markerIndex], map: map}));
     }
 }
+
+// MARK: - Script
+if (debug) {
+    mapLoadTestImages();
+}
