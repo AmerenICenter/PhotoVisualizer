@@ -60,6 +60,7 @@ function initMap() {
     // or execute them if the images are already there
     // I'm pretty sure this safeguard isn't necessary once I'm pulling the images from the user,
     // but it doesn't hurt to make sure
+    mapCenter = {lat: 0.0, lng: 0.0};
     mapMarkers = [];
     mapMarkerLocations = [];
     mapImageProcessCounter = 0;
@@ -90,8 +91,8 @@ function mapReadImageMetadata(image) {
         var lng = EXIF.getTag(this, "GPSLongitude");
         var lngRef = EXIF.getTag(this, "GPSLongitudeRef");
         // Image metadata has all requested tags in expected format
-        //if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
-          //  (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
+        if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
+            (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
             var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
             console.log("oh hello");
             console.log(photoLocation);
@@ -99,7 +100,7 @@ function mapReadImageMetadata(image) {
             mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1);
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1);
             mapMarkers.push(photoLocation);
-        //}
+        }
     });
     mapImageProcessCounter++;
     // All images have been processed
