@@ -54,6 +54,7 @@ function mapLoadTestImages() {
 // ----------------------------------------------------------------
 
 function mapInitialize() {
+    console.log("Map callback invoked.");
     // Register individual image onload functions
     // or execute them if the images are already there
     // I'm pretty sure this safeguard isn't necessary once I'm pulling the images from the user,
