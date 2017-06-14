@@ -126,7 +126,7 @@ function mapPopulate() {
 // ----------------------------------------------------------------
 
 function mapConvertDMS(dms, ref) {
-    val decGPS = dms[0].valueOf() + dms[1].valueOf() / 60 + dms[2].valueOf() / 3600;
+    var decGPS = dms[0].valueOf() + dms[1].valueOf() / 60 + dms[2].valueOf() / 3600;
     if (ref == "S" || ref == "W") {
         decGPS *= -1;
     }
