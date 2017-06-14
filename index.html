@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <!-- Google Maps API Key: AIzaSyCkqZcICe7cCgvAI7bO7pFzNBOvBsvL1hU -->
 <!-- Google Maps JavaScript API Key: AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU -->
 <head>
-	<title>Ameren Photo Visualizer</title>
-	<style>
+    <title>Ameren Photo Visualizer</title>
+    <style>
 		#map {
 			height: 80%;
 		}
@@ -13,41 +14,17 @@
 			margin: 0;
 			padding: 0;
 		}
+		img {
+			visibility: hidden;
+		}
 	</style>
 	<script type="text/javascript" src="/usr/local/lib/node_modules/npm/node_modules/exif-js/exif.js"></script>
 </head>
 <body onload="parseImage()">
-	<img id="test_img" src="/Users/rick/Downloads/IMG_0239.jpg" height="100px" width="100px" >
+	<img class="testImage" src="img" height="100px" width="100px" >
 	<div id="result"></div>
 	<div id="map"></div>
-	<!-- <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?key=AIzaSyCkqZcICe7cCgvAI7bO7pFzNBOvBsvL1hU
-		&center=-33.8569,151.2152
-		&zoom=18
-		&maptype=satellite" allowfullscreen> -->
-	<script>
-		function parseImage() {
-			var testImage = document.getElementById("test_img");
-			if (testImage.complete) {
-				console.log("ughh");
-			}
-			var resultArea = document.getElementById("result");
-			if (EXIF.getData(testImage, function () {
-				result_area.innerHTML = EXIF.getTag(this, "mimetype");
-			})) {
-				console.log("true");
-			} else {
-				console.log("false");
-			}
-		}
-		function initializeMap() {
-			console.log("no");
-			var img1 = document.getElementById("test_img");
-			img1.setAttribute("width", "200px");
-			console.log("maybe");
-		}
-	</script>
-
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU&callback=initializeMap"> </script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU&callback=mapInitialize"> </script>
 				
 </iframe>
 </body>
