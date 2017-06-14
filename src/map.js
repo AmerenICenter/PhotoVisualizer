@@ -123,3 +123,7 @@ if (DEBUG) {
     console.log("yes hello");
     mapLoadTestImages();
 }
+
+function namespaceTest() {
+    console.log("Ok, all this should work.");
+}
