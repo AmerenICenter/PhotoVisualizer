@@ -93,6 +93,8 @@ function mapReadImageMetadata(image) {
         if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
             (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
             var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
+            console.log("oh hello");
+            console.log(photoLocation);
             var n = mapMarkers.length;
             mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1);
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1);
