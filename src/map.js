@@ -130,6 +130,7 @@ function mapConvertDMS(dms, ref) {
     if (ref == "S" || ref == "W") {
         decGPS *= -1;
     }
+    console.log(decGPS);
     return decGPS;
 }
 
