@@ -99,9 +99,9 @@ function mapReadImageMetadata(image) {
             mapMarkers.push(photoLocation);
         }
     });
-    mapProcessImageCounter++;
+    mapImageProcessCounter++;
     // All images have been processed
-    if (mapProcessImageCounter == mapImgElements.length) {
+    if (mapImageProcessCounter == mapImgElements.length) {
         mapPopulate();
     }
 }
