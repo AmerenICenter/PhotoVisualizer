@@ -45,6 +45,7 @@ var mapMarkerLocations
 
 function mapLoadTestImages() {
     mapImgElements = document.getElementsByClassName(TEST_IMAGE_CLASS_NAME);
+    console.log(mapImgElements.length);
 }
 
 // ----------------------------------------------------------------
@@ -82,6 +83,7 @@ function initMap() {
 // ----------------------------------------------------------------
 
 function mapReadImageMetadata(image) {
+    console.log("Image metadata invoked.");
     if (imageHasData(image)) {
         EXIF.getData(image, function () {
             var lat = EXIF.getTag(this, "GPSLatitude");
