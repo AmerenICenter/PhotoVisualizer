@@ -48,12 +48,12 @@ function mapLoadTestImages() {
 }
 
 // ----------------------------------------------------------------
-// mapInitialize - Google Maps Javascript API callback function,
+// initMap - Google Maps Javascript API callback function,
 //                 triggers image metadata loads, which then call
 //                 map load function
 // ----------------------------------------------------------------
 
-function mapInitialize() {
+function initMap() {
     console.log("Map callback invoked.");
     // Register individual image onload functions
     // or execute them if the images are already there

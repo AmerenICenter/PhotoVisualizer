@@ -28,7 +28,11 @@
 	<img class="testImage" src="img/IMG_0254.jpg" height="100px" width="100px">
 	<div id="map"></div>
     <script type="text/javascript" src="src/map.js"> </script>
-    <script> namespaceTest(); </script>
+    <script> 
+        function mapInitialize() {
+            initMap();
+        }
+    </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU&ampcallback=mapInitialize"> </script>
 </body>
 </html>
