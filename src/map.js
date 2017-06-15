@@ -124,6 +124,7 @@ function mapPopulate() {
     console.log("Final Map Center: " + mapCenter.lat + ", " + mapCenter.lng);
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
+        console.log("Map Marker Location: " + mapMarkerLocations[markerIndex].lat + ", " + mapMarkerLocations[markerIndex].lng);
         mapMarkers.push(new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map}));
     }
     console.log("mapPopulate complete");
