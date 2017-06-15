@@ -121,7 +121,7 @@ function mapPopulate() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var enclosingBody = document.getElementsByTagName("body")[0];
     mapDiv.style.height = (window.innerHeight - parseInt(enclosingBody.style.marginTop) - parseInt(enclosingBody.style.marginBottom)) + "px";
-    console.log("innerHeight: " + window.innerHeight);
+    console.log("innerHeight: " + (window.innerHeight - parseInt(enclosingBody.style.marginTop) - parseInt(enclosingBody.style.marginBottom)));
     map = new google.maps.Map(mapDiv, {zoom: 8, center: mapCenter});
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
         mapMarkers.push(new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map}));
