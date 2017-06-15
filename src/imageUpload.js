@@ -1,5 +1,25 @@
+// Image upload completion flag
+var imageUploadCompleteFlag = false;
+
 var imgArray = new Array();
-function fileUpload(){
+
+// ----------------------------------------------------------------
+// imageUploadComplete - button trigger function, signals user
+//                       has finished uploading photos; if at least
+//                       one photo has been uploaded and map has
+//                       loaded, calls mapInit
+// ----------------------------------------------------------------
+
+function imageUploadComplete() {
+    if (!imageUploadCompleteFlag && imgArray.length > 0) {
+        imageUploadCompleteFlag = true;
+    }
+    if (imageUploadCompleteFlag && mapLoadCompleteFlag) {
+        mapInit();
+    }
+}
+
+function imageUpload(){
     var x = document.getElementById("myFile");
     var txt = "";
     var longDecimal = 0;
@@ -8,7 +28,7 @@ function fileUpload(){
         if (x.files.length == 0) {
             txt = "Select one or more files.";
         } else {
-            for(var i = 0; i < x.files.length; i++) {
+            for (var i = 0; i < x.files.length; i++) {
                 var file = x.files[i];
                 
                 if (file.type.match("image.*")) {
@@ -17,8 +37,10 @@ function fileUpload(){
                         var imageLoaded = document.createElement("img");
                         imageLoaded.src = fileLoadedEvent.target.result;
                         console.log(fileLoadedEvent.target.result);
-                        imgArray[i] = new Image();
-                        imgArray[i].src = fileLoadedEvent.target.result;
+                        var imageLoadedObject = new Image();
+                        imageLoadedObject.src = fileLoadedEvent.target.result;
+                        imageLoadedObject.className = "uploadedImage";
+                        imgArray.push(imageLoadedObject);
                         document.body.appendChild(imageLoaded);
                     };
                     fileReader.readAsDataURL(file);
@@ -32,13 +54,11 @@ function fileUpload(){
                     txt += "size: " + file.size + " bytes <br>";
                 }
             }
-            
-            for(var i = 0; i < x.files.length; i++) {
+            for (var i = 0; i < x.files.length; i++) {
                 fileReader.readAsDataURL(imgArray[i]);
             }
         }
-    }
-    else {
+    } else {
         if (x.value == "") {
             txt += "Select one or more files.";
         } else {
@@ -46,5 +66,5 @@ function fileUpload(){
             txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
         }
     }
-    document.getElementById("demo").innerHTML = txt;
+    document.getElementById("uploadedImageInfo").innerHTML = txt;
 }
