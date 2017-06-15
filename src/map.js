@@ -119,7 +119,7 @@ function mapReadImageMetadata(image) {
 
 function mapPopulate() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
-    mapDiv.setAttribute("height", window.innerHeight + "px");
+    //mapDiv.setAttribute("height", window.innerHeight + "px");
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
         mapMarkers.push(new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map}));
