@@ -58,6 +58,7 @@ function initMap() {
     // or execute them if the images are already there
     // I'm pretty sure this safeguard isn't necessary once I'm pulling the images from the user,
     // but it doesn't hurt to make sure
+    map = null;
     mapCenter = {lat: 0.0, lng: 0.0};
     mapMarkers = [];
     mapMarkerLocations = [];
@@ -115,13 +116,9 @@ function mapReadImageMetadata(image) {
 // ----------------------------------------------------------------
 
 function mapPopulate() {
-    var mapDiv = document.getElementById(MAP_DIV_ID);
-    var element = document.getElementsByTagName('html')[0],
-        style = window.getComputedStyle(element),
-        marginTop = style.getPropertyValue('margin-top'),
-        marginBottom = style.getPropertyValue('margin-bottom');
-    mapDiv.style.height = (window.innerHeight - 16) + "px";
+    mapResizeDiv();
     map = new google.maps.Map(mapDiv, {zoom: 8, center: mapCenter});
+    window.onresize = mapResizeDiv;
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
         mapMarkers.push(new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map}));
     }
@@ -140,6 +137,20 @@ function mapConvertDMS(dms, ref) {
         decGPS *= -1;
     }
     return decGPS;
+}
+
+// ----------------------------------------------------------------
+// mapResizeDiv - resizes map div to fit full screen (minus 8px
+//                margins), triggered whenever browser window is
+//                resized
+// ----------------------------------------------------------------
+
+function mapResizeDiv() {
+    var mapDiv = document.getElementById(MAP_DIV_ID);
+    mapDiv.style.height = (window.innerHeight - 16) + "px";
+    if (map != null) {
+        google.maps.event.trigger(map, "resize");
+    }
 }
 
 // MARK: - Script
