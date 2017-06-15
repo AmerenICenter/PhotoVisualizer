@@ -123,7 +123,7 @@ function mapPopulate() {
         style = window.getComputedStyle(element),
         marginTop = style.getPropertyValue('margin-top'),
         marginBottom = style.getPropertyValue('margin-bottom');
-    mapDiv.style.height = (window.innerHeight - marginTop - marginBottom) + "px";
+    mapDiv.style.height = (window.innerHeight - 16) + "px";
     console.log("innerHeight: " + window.innerHeight);
     console.log(marginTop);
     map = new google.maps.Map(mapDiv, {zoom: 8, center: mapCenter});
