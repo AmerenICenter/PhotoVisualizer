@@ -126,6 +126,7 @@ function mapPopulate() {
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
         mapMarkers.push(new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map}));
     }
+    console.log("mapPopulate complete");
 }
 
 // ----------------------------------------------------------------
