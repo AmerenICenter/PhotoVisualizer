@@ -1,5 +1,25 @@
+// Image upload completion flag
+var imageUploadCompleteFlag = false;
+
 var imgArray = new Array();
-function fileUpload(){
+
+// ----------------------------------------------------------------
+// imageUploadComplete - button trigger function, signals user
+//                       has finished uploading photos; if at least
+//                       one photo has been uploaded and map has
+//                       loaded, calls mapInit
+// ----------------------------------------------------------------
+
+function imageUploadComplete() {
+    if (!imageUploadCompleteFlag && imgArray.length > 0) {
+        imageUploadCompleteFlag = true;
+    }
+    if (imageUploadCompleteFlag && mapLoadCompleteFlag) {
+        mapInit();
+    }
+}
+
+function imageUpload(){
     var x = document.getElementById("myFile");
     var txt = "";
     var longDecimal = 0;
@@ -17,9 +37,10 @@ function fileUpload(){
                         var imageLoaded = document.createElement("img");
                         imageLoaded.src = fileLoadedEvent.target.result;
                         console.log(fileLoadedEvent.target.result);
-                        imgArray[i] = new Image();
-                        imgArray[i].src = fileLoadedEvent.target.result;
-                        imgArray[i].className = "uploadedImage";
+                        var imageLoadedObject = new Image();
+                        imageLoadedObject.src = fileLoadedEvent.target.result;
+                        imageLoadedObject.className = "uploadedImage";
+                        imgArray.push(imageLoadedObject);
                         document.body.appendChild(imageLoaded);
                     };
                     fileReader.readAsDataURL(file);

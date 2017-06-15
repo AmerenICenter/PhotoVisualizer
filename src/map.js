@@ -4,7 +4,7 @@
 var DEBUG = true;
 
 // Class name for test images
-var TEST_IMAGE_CLASS_NAME = "testImage";
+Flagvar TEST_IMAGE_CLASS_NAME = "testImage";
 
 var MAP_DIV_ID = "map";
 
@@ -36,7 +36,7 @@ var mapMarkers;
 var mapMarkerLocations
 
 // Google Map load completion flag
-var mapLoadComplete = false;
+var mapLoadCompleteFlag = false;
 
 // MARK: - Functions
 // Functions all prefixed with "map" to avoid namespace collisions
@@ -51,14 +51,14 @@ function mapLoadTestImages() {
 }
 
 // ----------------------------------------------------------------
-// mapOnload - Google Maps Javascript API callback function, sets
-//             mapLoadComplete flag, initializes map if file
-//             upload is also complete
+// mapLoadComplete - Google Maps Javascript API callback function,
+//                   sets mapLoadComplete flag, initializes map if
+//                   file upload is also complete
 // ----------------------------------------------------------------
 
-function mapOnload() {
-    mapLoadComplete = true;
-    if (fileUploadComplete) {
+function mapLoadComplete() {
+    mapLoadCompleteFlag = true;
+    if (imageUploadCompleteFlag) {
         mapInit();
     }
 }
