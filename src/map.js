@@ -119,7 +119,7 @@ function mapReadImageMetadata(image) {
 
 function mapPopulate() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
-    var enclosingBody = document.getElementsByTagName("body")[0];
+    var enclosingBody = document.getElementsByTagName("bodies")[0];
     mapDiv.style.height = (window.innerHeight - parseInt(enclosingBody.style.marginTop) - parseInt(enclosingBody.style.marginBottom)) + "px";
     console.log("innerHeight: " + (window.innerHeight - parseInt(enclosingBody.style.marginTop) - parseInt(enclosingBody.style.marginBottom)));
     console.log(enclosingBody.style.marginTop);
