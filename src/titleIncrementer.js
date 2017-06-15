@@ -1,1 +1,1 @@
-document.title = "Commit 6 "; console.log("belg");
+document.title = "Commit 7 ";

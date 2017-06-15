@@ -82,7 +82,7 @@ function initMap() {
 // ----------------------------------------------------------------
 
 function mapReadImageMetadata(image) {
-    EXIF.getData(image, function () {
+    if (!EXIF.getData(image, function () {
         var lat = EXIF.getTag(this, "GPSLatitude");
         var latRef = EXIF.getTag(this, "GPSLatitudeRef");
         var lng = EXIF.getTag(this, "GPSLongitude");
@@ -98,13 +98,20 @@ function mapReadImageMetadata(image) {
             console.log("Map Center: " + mapCenter.lat + ", " + mapCenter.lng);
             mapMarkers.push(photoLocation);
         }
-    });
-    mapImageProcessCounter++;
-    // All images have been processed
-    if (mapImageProcessCounter == mapImgElements.length) {
-        console.log("mapImageProcessCounter: " + mapImageProcessCounter);
-        console.log("number of map image elements: " + mapImgElements.length);
-        mapPopulate();
+        mapImageProcessCounter++;
+        if (mapImageProcessCounter == mapImgElements.length) {
+            console.log("mapImageProcessCounter: " + mapImageProcessCounter);
+            console.log("number of map image elements: " + mapImgElements.length);
+            mapPopulate();
+        }
+    })) {
+        mapImageProcessCounter++;
+        // All images have been processed
+        if (mapImageProcessCounter == mapImgElements.length) {
+            console.log("mapImageProcessCounter: " + mapImageProcessCounter);
+            console.log("number of map image elements: " + mapImgElements.length);
+            mapPopulate();
+        }
     }
 }
 
@@ -140,5 +147,3 @@ function mapConvertDMS(dms, ref) {
 if (DEBUG) {
     mapLoadTestImages();
 }
-
-
