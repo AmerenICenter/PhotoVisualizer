@@ -95,13 +95,10 @@ function mapReadImageMetadata(image) {
             var n = mapMarkers.length;
             mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1.0);
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1.0);
-            console.log("Map Center: " + mapCenter.lat + ", " + mapCenter.lng);
-            mapMarkers.push(photoLocation);
+            mapMarkerLocations.push(photoLocation);
         }
         mapImageProcessCounter++;
         if (mapImageProcessCounter == mapImgElements.length) {
-            console.log("mapImageProcessCounter: " + mapImageProcessCounter);
-            console.log("number of map image elements: " + mapImgElements.length);
             mapPopulate();
         }
     })) {
