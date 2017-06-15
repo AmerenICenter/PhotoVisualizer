@@ -93,8 +93,9 @@ function mapReadImageMetadata(image) {
             var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
             console.log(photoLocation);
             var n = mapMarkers.length;
-            mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1);
-            mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1);
+            mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1.0);
+            mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1.0);
+            console.log("Map Center: " + mapCenter.lat + ", " + mapCenter.lng);
             mapMarkers.push(photoLocation);
         }
     });
