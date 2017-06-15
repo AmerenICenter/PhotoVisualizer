@@ -4,7 +4,7 @@
 var DEBUG = true;
 
 // Class name for test images
-Flagvar TEST_IMAGE_CLASS_NAME = "testImage";
+var TEST_IMAGE_CLASS_NAME = "testImage";
 
 var MAP_DIV_ID = "map";
 
