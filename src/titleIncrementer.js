@@ -1,1 +1,1 @@
-document.getElementsByTagName(title)[0].innerHTML = "Commit 1 "
+document.title = "Commit 1 "
