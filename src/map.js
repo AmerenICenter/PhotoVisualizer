@@ -94,7 +94,6 @@ function mapReadImageMetadata(image) {
         if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
             (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
             var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
-            console.log("oh hello");
             console.log(photoLocation);
             var n = mapMarkers.length;
             mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1);
@@ -115,7 +114,7 @@ function mapReadImageMetadata(image) {
 // ----------------------------------------------------------------
 
 function mapPopulate() {
-    console.log(mapCenter);
+    console.log("Map Center: " + mapCenter);
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
     for (var markerIndex = 0; markerIndex < mapMarkers.length; markerIndex++) {
         mapMarkers.push(new google.maps.Marker({position: mapMarkers[markerIndex], map: map}));
