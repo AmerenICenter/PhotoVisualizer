@@ -124,8 +124,8 @@ function mapPopulate() {
         marginTop = style.getPropertyValue('margin-top'),
         marginBottom = style.getPropertyValue('margin-bottom');
     mapDiv.style.height = (window.innerHeight - marginTop - marginBottom) + "px";
-    console.log("innerHeight: " + (window.innerHeight - marginTop - marginBottom));
-    console.log(mapDiv.style.marginTop);
+    console.log("innerHeight: " + window.innerHeight);
+    console.log(marginTop);
     map = new google.maps.Map(mapDiv, {zoom: 8, center: mapCenter});
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
         mapMarkers.push(new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map}));
