@@ -119,9 +119,12 @@ function mapReadImageMetadata(image) {
 
 function mapPopulate() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
-    var enclosingBody = document.getElementsByTagName("body")[0];
-    mapDiv.style.height = (window.innerHeight - parseInt(enclosingBody.style.marginTop) - parseInt(enclosingBody.style.marginBottom)) + "px";
-    console.log("innerHeight: " + (window.innerHeight - parseInt(enclosingBody.style.marginTop) - parseInt(enclosingBody.style.marginBottom)));
+    var element = document.getElementsByTagName('html')[0],
+        style = window.getComputedStyle(element),
+        marginTop = style.getPropertyValue('margin-top'),
+        marginBottom = style.getPropertyValue('margin-bottom');
+    mapDiv.style.height = (window.innerHeight - marginTop - marginBottom) + "px";
+    console.log("innerHeight: " + (window.innerHeight - marginTop - marginBottom));
     console.log(mapDiv.style.marginTop);
     map = new google.maps.Map(mapDiv, {zoom: 8, center: mapCenter});
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
