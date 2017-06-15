@@ -119,7 +119,7 @@ function mapPopulate() {
     mapResizeDiv();
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
     window.onresize = mapResizeDiv;
-    for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
+//    for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
 //  var tempImage = mapMarkerLocations[markerIndex].img; 
 //  '<img src = ' + tempImage.src + '>' + '</img>'
         var contentString = '<div id="content">'+
@@ -146,14 +146,14 @@ function mapPopulate() {
             content: contentString
         });
         var markerObject = new google.maps.Marker({
-            position: mapMarkerLocations[markerIndex], 
+            position: mapMarkerLocations[0], 
             map: map
         });
 //        mapMarkers.push(markerObject);
         markerObject.addListener('click', function() {
             infowindow.open(map, marker);
         });
-    }
+//    }
 }
 
 // ----------------------------------------------------------------
