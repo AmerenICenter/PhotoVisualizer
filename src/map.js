@@ -102,6 +102,7 @@ function mapReadImageMetadata(image) {
     mapImageProcessCounter++;
     // All images have been processed
     if (mapImageProcessCounter == mapImgElements.length) {
+        console.log("number of map image elements: " + mapImgElements.length);
         mapPopulate();
     }
 }
