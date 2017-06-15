@@ -45,7 +45,6 @@ var mapMarkerLocations
 
 function mapLoadTestImages() {
     mapImgElements = document.getElementsByClassName(TEST_IMAGE_CLASS_NAME);
-    console.log(mapImgElements.length);
 }
 
 // ----------------------------------------------------------------
@@ -55,7 +54,6 @@ function mapLoadTestImages() {
 // ----------------------------------------------------------------
 
 function initMap() {
-    console.log("Map callback invoked.");
     // Register individual image onload functions
     // or execute them if the images are already there
     // I'm pretty sure this safeguard isn't necessary once I'm pulling the images from the user,
@@ -84,7 +82,6 @@ function initMap() {
 // ----------------------------------------------------------------
 
 function mapReadImageMetadata(image) {
-    console.log("Image metadata invoked.");
     EXIF.getData(image, function () {
         var lat = EXIF.getTag(this, "GPSLatitude");
         var latRef = EXIF.getTag(this, "GPSLatitudeRef");
@@ -133,12 +130,10 @@ function mapConvertDMS(dms, ref) {
     if (ref == "S" || ref == "W") {
         decGPS *= -1;
     }
-    console.log(decGPS);
     return decGPS;
 }
 
 // MARK: - Script
 if (DEBUG) {
-    console.log("yes hello");
     mapLoadTestImages();
 }
