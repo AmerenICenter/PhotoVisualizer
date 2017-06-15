@@ -91,7 +91,7 @@ function mapReadImageMetadata(image) {
         // Image metadata has all requested tags in expected format
         if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
             (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
-            var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef), img: this};
+            var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
             var n = mapMarkers.length;
             mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1.0);
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1.0);
@@ -120,12 +120,16 @@ function mapPopulate() {
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
     window.onresize = mapResizeDiv;
     for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
-        var tempImage = mapMarkerLocations[markerIndex].img; 
-        var contentString = '<h1>' + 'Hello' + '</h1>' + '<img src = ' + tempImage.src + '>' + '</img>';
+//  var tempImage = mapMarkerLocations[markerIndex].img; 
+//  '<img src = ' + tempImage.src + '>' + '</img>'
+        var contentString = '<h1>Hello</h1>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
-        var markerObject = new google.maps.Marker({position: mapMarkerLocations[markerIndex], map: map});
+        var markerObject = new google.maps.Marker({
+            position: mapMarkerLocations[markerIndex], 
+            map: map
+        });
         mapMarkers.push(markerObject);
         markerObject.addListener('click', function() {
             infowindow.open(map, marker);
