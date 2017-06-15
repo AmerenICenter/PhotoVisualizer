@@ -35,6 +35,9 @@ var mapMarkers;
 // {lat, lng} marker location object array
 var mapMarkerLocations
 
+// Google Map load completion flag
+var mapLoadComplete = false;
+
 // MARK: - Functions
 // Functions all prefixed with "map" to avoid namespace collisions
 
@@ -48,12 +51,24 @@ function mapLoadTestImages() {
 }
 
 // ----------------------------------------------------------------
-// initMap - Google Maps Javascript API callback function,
-//                 triggers image metadata loads, which then call
-//                 map load function
+// mapOnload - Google Maps Javascript API callback function, sets
+//             mapLoadComplete flag, initializes map if file
+//             upload is also complete
 // ----------------------------------------------------------------
 
-function initMap() {
+function mapOnload() {
+    mapLoadComplete = true;
+    if (fileUploadComplete) {
+        mapInit();
+    }
+}
+
+// ----------------------------------------------------------------
+// mapInit - triggers image metadata loads, which then call
+//            map load function
+// ----------------------------------------------------------------
+
+function mapInit() {
     // Register individual image onload functions
     // or execute them if the images are already there
     // I'm pretty sure this safeguard isn't necessary once I'm pulling the images from the user,
@@ -156,4 +171,6 @@ function mapResizeDiv() {
 // MARK: - Script
 if (DEBUG) {
     mapLoadTestImages();
+} else {
+    mapImgElements = imgArray;
 }

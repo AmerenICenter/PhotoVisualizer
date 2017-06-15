@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!-- Google Maps API Key: AIzaSyCkqZcICe7cCgvAI7bO7pFzNBOvBsvL1hU -->
 <!-- Google Maps JavaScript API Key: AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU -->
@@ -9,21 +8,24 @@
 			height: 400px;
             width: 100%;
 		}
-        .testImage {
+        .testImage, .uploadedImage {
             display: none;
         }
 	</style>
+    <script type="text/javascript" src="src/titleIncrementer.js"> </script>
+    <script type="text/javascript" src="src/exif.js"> </script>
+    <script type="text/javascript" src="src/map.js"> </script>
+    <script type="text/javascript" src="src/photoUpload.js"> </script>
 </head>
-<body>
+<body id="testBody" onload="fileUpload()">
+    <input type ="file" id="myFile" multiple size="50" onchange="fileUpload()">
+    <p id="uploadedImageInfo"></p>
 	<div id="map"></div>
     <img class="testImage" src="img/IMG_0250.jpg" height="100px" width="100px">
 	<img class="testImage" src="img/IMG_0251.jpg" height="100px" width="100px">
 	<img class="testImage" src="img/IMG_0252.jpg" height="100px" width="100px">
 	<img class="testImage" src="img/IMG_0253.jpg" height="100px" width="100px">
 	<img class="testImage" src="img/IMG_0254.jpg" height="100px" width="100px">
-    <script type="text/javascript" src="src/titleIncrementer.js"> </script>
-    <script type="text/javascript" src="src/exif.js"> </script>
-    <script type="text/javascript" src="src/map.js"> </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU&callback=initMap"> </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU&callback=mapInit"> </script>
 </body>
 </html>

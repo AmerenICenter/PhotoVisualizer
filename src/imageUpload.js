@@ -8,7 +8,7 @@ function fileUpload(){
         if (x.files.length == 0) {
             txt = "Select one or more files.";
         } else {
-            for(var i = 0; i < x.files.length; i++) {
+            for (var i = 0; i < x.files.length; i++) {
                 var file = x.files[i];
                 
                 if (file.type.match("image.*")) {
@@ -19,6 +19,7 @@ function fileUpload(){
                         console.log(fileLoadedEvent.target.result);
                         imgArray[i] = new Image();
                         imgArray[i].src = fileLoadedEvent.target.result;
+                        imgArray[i].className = "uploadedImage";
                         document.body.appendChild(imageLoaded);
                     };
                     fileReader.readAsDataURL(file);
@@ -32,13 +33,11 @@ function fileUpload(){
                     txt += "size: " + file.size + " bytes <br>";
                 }
             }
-            
-            for(var i = 0; i < x.files.length; i++) {
+            for (var i = 0; i < x.files.length; i++) {
                 fileReader.readAsDataURL(imgArray[i]);
             }
         }
-    }
-    else {
+    } else {
         if (x.value == "") {
             txt += "Select one or more files.";
         } else {
@@ -46,5 +45,5 @@ function fileUpload(){
             txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
         }
     }
-    document.getElementById("demo").innerHTML = txt;
+    document.getElementById("uploadedImageInfo").innerHTML = txt;
 }
