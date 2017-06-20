@@ -3,6 +3,8 @@
 // Image view element class name
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 
+var IMAGE_LIST_ID_NAME = "imageInfoListView";
+
 // MARK: - Global Variables
 
 // Image upload completion flag
@@ -58,6 +60,68 @@ function imageViewUnload() {
 }
 
 // ----------------------------------------------------------------
+// createImageListItemWithFile - returns file load callback
+//                               function that creates list
+//                               entry including both photo
+//                               and file info
+// @param file - the file associated with this list entry
+// @return - a function to assign to the FileReader's onload
+// ----------------------------------------------------------------
+
+function createImageListItemWithFile(file) {
+    return function(fileLoadedEvent) {
+        var imageLoadedObject = new Image();
+        imageLoadedObject.src = fileLoadedEvent.target.result;
+        imgArray.push(imageLoadedObject);
+
+        var imageListItem = document.createElement("div");
+        imageListItem.className = "imageInfoListItem";
+        
+        var imageListImg = document.createElement("img");
+        imageListImg.src = fileLoadedEvent.target.result;
+        imageListImg.className = "imageInfoListImage";
+        imageListItem.appendChild(imageListImg);
+
+        var imageListDescription = document.createElement("div");
+        imageListDescription.className = "imageInfoListDescription";
+        var descTxt = "<br><strong>" + (i+1) + ". file</strong><br>";
+        if ('name' in file) {
+            descTxt += "name: " + file.name + "<br>";
+        }
+        if ('size' in file) {
+            descTxt += "size: " + file.size + " bytes <br>";
+        }
+        imageListDescription.innerHTML = descTxt;
+        imageListItem.appendChild(imageListDescription);
+
+        var imageListDelete = document.createElement("img");
+        imageListDelete.src = "img/ImageDeleteIcon.png";
+        imageListDelete.onclick = imageDeleteEntry(imageListItem, imageLoadedObject);
+        imageListDelete.class = "imageInfoListDeleteButton";
+        imageListItem.appendChild(imageListDelete);
+
+        document.getElementById(IMAGE_LIST_ID_NAME).appendChild(imageListItem);
+    };
+}
+
+// ----------------------------------------------------------------
+// imageDeleteEntry - delete icon onclick function generator
+// @param imageItem - HTML DOM image list item to delete when
+//                    button is pressed
+// @param imageObject - Javascript image object to delete from
+//                      array (again, when the button is pressed)
+// @return - function to assign to delete icon's onclick
+// ----------------------------------------------------------------
+
+function imageDeleteEntry(imageItem, imageObject) {
+    return function() {
+        imageItem.parentNode.removeChild(imageItem);
+        var imageObjectIndex = imgArray.findIndex(function(otherObject) { return imageObject == otherObject; });
+        imgArray.splice(imageObjectIndex, 1);
+    }
+}
+
+// ----------------------------------------------------------------
 // imageUpload - called on document load (I think?), handles user-
 //               supplied photos (does not transfer them back to
 //               server - that doesn't happen)
@@ -76,25 +140,10 @@ function imageUpload() {
                 var file = x.files[i];
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
-                    fileReader.onload = function(fileLoadedEvent) {
-                        var imageLoaded = document.createElement("img");
-                        imageLoaded.src = fileLoadedEvent.target.result;
-                        imageLoaded.className = "uploadedImage";
-                        var imageLoadedObject = new Image();
-                        imageLoadedObject.src = fileLoadedEvent.target.result;
-                        imgArray.push(imageLoadedObject);
-                        document.body.appendChild(imageLoaded);
-                    };
+                    fileReader.onload = createImageListItemWithFile(file);
                     fileReader.readAsDataURL(file);
                 }
                 
-                txt += "<br><strong>" + (i+1) + ". file</strong><br>";
-                if ('name' in file) {
-                    txt += "name: " + file.name + "<br>";
-                }
-                if ('size' in file) {
-                    txt += "size: " + file.size + " bytes <br>";
-                }
             }
         }
     } else {
@@ -105,5 +154,5 @@ function imageUpload() {
             txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
         }
     }
-    document.getElementById("uploadedImageInfo").innerHTML = txt;
+    document.getElementById("imageUploadInfo").innerHTML = txt;
 }

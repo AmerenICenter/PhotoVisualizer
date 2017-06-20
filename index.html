@@ -4,9 +4,45 @@
     <title>Photo Visualizer</title>
     <style>
         body {
-            background-color: #969696;
+            background-color: #6BB835;
         }
-		#map {
+        
+        // MARK: - Image Upload View Constraints
+        .imageElements {
+            width: 100%;
+        }
+
+        #imageContentView {
+            width: 90%;
+            margin: auto;
+            border-color: #555555;
+            background-color: #CCCCCC;
+            border-radius = 8px;
+        }
+        #imageInfoListView {
+            background-color: white;
+        }
+        .imageInfoListItem {
+            border-width: 1px 0 0 0;
+            border-color: #CCCCCC;
+            padding: 8px;
+            margin: 0;
+        }
+        .imageInfoListImage {
+            display: inline;
+            width: 128px;
+            height: 128px;
+            margin-right: 8px;
+        }
+        .imageInfoListDescription {
+            display: inline;
+        }
+        .imageInfoListDeleteButton {
+            display: inline;
+            float: right;
+        }
+
+        #map {
 			height: 400px;
             width: 100%;
             margin: 8px auto;
@@ -14,7 +50,7 @@
         #mapButton {
             margin: 0 auto;
         }
-        .mapElements, .uploadedImage, .testImage, #info {
+        .mapElements, .imageUpload, .testImage, #info {
             display: none;
         }
         #fileUpload {
@@ -28,9 +64,13 @@
 </head>
 <body onload="imageUpload()">
     <div class="imageElements">
-        <input type="file" id="fileUpload" multiple size="50" onchange="imageUpload()">
-        <p id="uploadedImageInfo"></p>
-        <button onclick="imageUploadComplete()">Finished</button>
+        <div id="imageContentView">
+            <input type="file" id="fileUpload" multiple size="50" onchange="imageUpload()">
+            <div id="imageInfoListView">
+                <p id="imageUploadInfo"></p>
+            </div>
+            <button onclick="imageUploadComplete()">Finished</button>
+        </div>
     </div>
     <div class="mapElements">
         <button id="mapButton" onclick="mapViewUnload(); imageViewLoad();">Back</button>
