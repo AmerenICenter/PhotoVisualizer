@@ -92,14 +92,10 @@ function mapReset() {
     if (y.style.display === 'block') {
         y.style.display = 'none';
     }
-    var x = document.getElementById(MAP_DIV_ID);
-    if (x.style.display === 'none') {
-        x.style.display = 'block';
-    }
     while (y.childElementCount !== 1) {
         y.removeChild(y.lastChild);
     }
-
+    mapViewLoad();
 }
 
 // ----------------------------------------------------------------

@@ -41,7 +41,7 @@ function imageUploadComplete() {
 function imageViewLoad() {
    var imageViewElements = document.getElementsByClassName(IMAGE_VIEW_CLASS_NAME);
    for (var imageViewIndex = 0; imageViewIndex < imageViewElements.length; imageViewIndex++) {
-       imageViewElements[imageViewIndex].style.display = "initial";
+       imageViewElements[imageViewIndex].style.display = "block";
    }
    imageUploadCompleteFlag = false;
 }
