@@ -151,16 +151,18 @@ function mapLoadComplete() {
 }
 
 // ----------------------------------------------------------------
-// mapSwitchView - removes HTML elements associated with file
-//                 upload and inserts map div
+// mapSwitchView - hides HTML elements associated with file
+//                 upload and reveals map div
 // ----------------------------------------------------------------
 
 function mapSwitchView() {
-   document.getElementsByClassName(IMAGE_CONTEXT_CLASS_NAME).forEach(function (imageElement) {
-       imageElement.style.display = "none";
+   var imageContextElements = document.getElementsByClassName(IMAGE_CONTEXT_CLASS_NAME);
+   for (var imageContextIndex = 0; imageContextIndex < imageContextElements.length; imageContextIndex++) {
+       imageContextElements[imageContextIndex].style.display = "none";
    });
-   document.getElementsByClassName(MAP_ELEMENT_CLASS_NAME).forEach(function (mapElement) {
-       mapElement.style.display = "inline";
+   var mapContextElements = document.getElementsByClassName(MAP_CONTEXT_CLASS_NAME);
+   for (var mapContextIndex = 0; mapContextIndex < mapContextElements.length; mapContextIndex++) {
+       mapContextElements[mapContextIndex].style.display = "inline";
    });
 }
 
