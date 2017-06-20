@@ -269,6 +269,7 @@ function mapPopulate() {
             img = clustObjArray[i].arr[j].img;
             contentString += "<img width='80' src =" + img.src + ">"; // NEW      
         }
+        contentString += "<button type='button' onclick='mapCreateInfoPage(" + i +  ")'>Click Me</button>"; 
         console.log("length of cluster" + i);
         console.log(clustObjArray[i].arr.length);
 
