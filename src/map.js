@@ -7,8 +7,8 @@ var DEBUG = false;
 var TEST_IMAGE_CLASS_NAME = "testImage";
 
 // Class names for various page contexts
-var IMAGE_CONTEXT_CLASS_NAME = "imageElements";
-var MAP_CONTEXT_CLASS_NAME = "mapElements";
+var IMAGE_VIEW_CLASS_NAME = "imageElements";
+var MAP_VIEW_CLASS_NAME = "mapElements";
 
 var MAP_DIV_ID = "map";
 
@@ -139,24 +139,30 @@ function mapLoadTestImages() {
 function mapLoadComplete() {
     mapLoadCompleteFlag = true;
     if (DEBUG || imageUploadCompleteFlag) {
-        mapSwitchView();
+        imageViewUnload();
+        mapViewLoad();
         mapInit();
     }
 }
 
 // ----------------------------------------------------------------
-// mapSwitchView - hides HTML elements associated with file
-//                 upload and reveals map div
+// mapViewLoad - reveals map div
 // ----------------------------------------------------------------
 
-function mapSwitchView() {
-   var imageContextElements = document.getElementsByClassName(IMAGE_CONTEXT_CLASS_NAME);
-   for (var imageContextIndex = 0; imageContextIndex < imageContextElements.length; imageContextIndex++) {
-       imageContextElements[imageContextIndex].style.display = "none";
+function mapViewLoad() {
+   var mapViewElements = document.getElementsByClassName(MAP_VIEW_CLASS_NAME);
+   for (var mapViewIndex = 0; mapViewIndex < mapViewElements.length; mapViewIndex++) {
+       mapViewElements[mapViewIndex].style.display = "initial";
    }
-   var mapContextElements = document.getElementsByClassName(MAP_CONTEXT_CLASS_NAME);
-   for (var mapContextIndex = 0; mapContextIndex < mapContextElements.length; mapContextIndex++) {
-       mapContextElements[mapContextIndex].style.display = "block";
+}
+
+// ----------------------------------------------------------------
+// mapViewUnload - hides map div
+// ----------------------------------------------------------------
+function mapViewUnload() {
+   var mapViewElements = document.getElementsByClassName(MAP_VIEW_CLASS_NAME);
+   for (var mapViewIndex = 0; mapViewIndex < mapViewElements.length; mapViewIndex++) {
+       mapViewElements[mapViewIndex].style.display = "none";
    }
 }
 

@@ -3,6 +3,9 @@
 <head>
     <title>Photo Visualizer</title>
     <style>
+        body {
+            background-color: #323232;
+        }
 		#map {
 			height: 400px;
             width: 100%;
@@ -10,6 +13,8 @@
         .mapElements, .uploadedImage, .testImage, #info {
             display: none;
         }
+        #fileUpload {
+
 	</style>
     <script type="text/javascript" src="src/titleIncrementer.js"> </script>
     <script type="text/javascript" src="src/exif.js"> </script>
@@ -17,9 +22,10 @@
     <script type="text/javascript" src="src/imageUpload.js"> </script>
 </head>
 <body onload="imageUpload()">
-    <input class="imageElements" type="file" id="myFile" multiple size="50" onchange="imageUpload()">
+    <input class="imageElements" type="file" id="fileUpload" multiple size="50" onchange="imageUpload()">
     <p class="imageElements" id="uploadedImageInfo"></p>
     <button class="imageElements" onclick="imageUploadComplete()">Finished</button>
+    <button class="mapElements" onclick="mapViewUnload(); imageViewLoad();">Back</button>
 	<div class="mapElements" id="map"></div>
     <div id="info">
             <button onclick="mapReset()">Reset</button>

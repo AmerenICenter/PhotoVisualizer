@@ -1,13 +1,25 @@
+// MARK: - Constants
+
+// Image view element class name
+var IMAGE_VIEW_CLASS_NAME = "imageElements";
+
+// MARK: - Global Variables
+
 // Image upload completion flag
 var imageUploadCompleteFlag = false;
 
+// Array to hold Javascript image objects
 var imgArray = new Array();
+
+// MARK: - Functions
+// Functions prefixed with "image" to avoid namespace collisions
 
 // ----------------------------------------------------------------
 // imageUploadComplete - button trigger function, signals user
 //                       has finished uploading photos; if at least
 //                       one photo has been uploaded and map has
-//                       loaded, calls mapSwitchView and mapInit
+//                       loaded, calls imageViewUnload, mapViewLoad
+//                       and mapInit
 // ----------------------------------------------------------------
 
 function imageUploadComplete() {
@@ -15,13 +27,44 @@ function imageUploadComplete() {
         imageUploadCompleteFlag = true;
     }
     if (imageUploadCompleteFlag && mapLoadCompleteFlag) {
-        mapSwitchView();
+        imageViewUnload();
+        mapViewLoad();
         mapInit();
     }
 }
 
-function imageUpload(){
-    var x = document.getElementById("myFile");
+// ----------------------------------------------------------------
+// imageViewLoad - reveals elements for image upload and resets 
+//                 image upload status
+// ----------------------------------------------------------------
+
+function imageViewLoad() {
+   var imageViewElements = document.getElementsByClassName(IMAGE_VIEW_CLASS_NAME);
+   for (var imageViewIndex = 0; imageViewIndex < imageViewElements.length; imageViewIndex++) {
+       imageViewElements[imageViewIndex].style.display = "initial";
+   }
+   imageUploadCompleteFlag = false;
+}
+
+// ----------------------------------------------------------------
+// imageViewUnload - hides elements for image upload
+// ----------------------------------------------------------------
+
+function imageViewUnload() {
+   var imageViewElements = document.getElementsByClassName(IMAGE_VIEW_CLASS_NAME);
+   for (var imageViewIndex = 0; imageViewIndex < imageViewElements.length; imageViewIndex++) {
+       imageViewElements[imageViewIndex].style.display = "none";
+   }
+}
+
+// ----------------------------------------------------------------
+// imageUpload - called on document load (I think?), handles user-
+//               supplied photos (does not transfer them back to
+//               server - that doesn't happen)
+// ----------------------------------------------------------------
+
+function imageUpload() {
+    var x = document.getElementById("fileUpload");
     var txt = "";
     var longDecimal = 0;
     var latDecimal = 0;
@@ -31,7 +74,6 @@ function imageUpload(){
         } else {
             for (var i = 0; i < x.files.length; i++) {
                 var file = x.files[i];
-                
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
                     fileReader.onload = function(fileLoadedEvent) {
