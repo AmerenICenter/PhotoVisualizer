@@ -37,10 +37,10 @@ function imageUpload(){
                     fileReader.onload = function(fileLoadedEvent) {
                         var imageLoaded = document.createElement("img");
                         imageLoaded.src = fileLoadedEvent.target.result;
+                        imageLoaded.className = "uploadedImage";
                         console.log(fileLoadedEvent.target.result);
                         var imageLoadedObject = new Image();
                         imageLoadedObject.src = fileLoadedEvent.target.result;
-                        imageLoadedObject.className = "uploadedImage";
                         imgArray.push(imageLoadedObject);
                         document.body.appendChild(imageLoaded);
                     };
