@@ -316,7 +316,7 @@ function mapConvertDMS(dms, ref) {
 function mapResizeDiv() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
-    mapDiv.style.height = (window.innerHeight - mapBackButton - 16) + "px";
+    mapDiv.style.height = (window.innerHeight - mapBackButton.offsetHeight - 16) + "px";
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }
