@@ -15,6 +15,7 @@ function imageUploadComplete() {
         imageUploadCompleteFlag = true;
     }
     if (imageUploadCompleteFlag && mapLoadCompleteFlag) {
+
         mapInit();
     }
 }

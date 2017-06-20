@@ -1,10 +1,14 @@
 // MARK: - Constants
 
 // True during testing
-var DEBUG = true;
+var DEBUG = false;
 
 // Class name for test images
 var TEST_IMAGE_CLASS_NAME = "testImage";
+
+// Class names for various page contexts
+var IMAGE_CONTEXT_CLASS_NAME = "imageElements";
+var MAP_CONTEXT_CLASS_NAME = "mapElements";
 
 var MAP_DIV_ID = "map";
 
@@ -33,13 +37,96 @@ var mapCenter;
 var mapMarkers;
 
 // {lat, lng} marker location object array
-var mapMarkerLocations
+var mapMarkerLocations;
 
 // Google Map load completion flag
 var mapLoadCompleteFlag = false;
 
+// array of imgs
+var mapMarkImage; // NEW
+
+// Definition of cluster object class
+class imageObj {  // NEWER
+    constructor(lat, lng, img) {
+        this.lat = lat;
+        this.lng = lng;
+        this.img = img;
+    }
+}
+
+// Declaration of cluster object array class
+class clustObj { // NEWER
+    constructor(imgobj) {
+        this.arr = [];
+        this.arr.push(imgobj);
+        this.avgLng = imgobj.lng;
+        this.avgLat = imgobj.lat;
+        this.sizeElem = 1.0;
+    }
+    add(imgobj) {
+        this.avgLng = (this.avgLng * this.sizeElem) + imgobj.lng;
+        this.avgLat = (this.avgLat * this.sizeElem) + imgobj.lat;
+        this.sizeElem++;
+        this.avgLng = this.avgLng/this.sizeElem;
+        this.avgLat = this.avgLat/this.sizeElem;
+        this.arr.push(imgobj);
+    }
+}
+
+// Array of cluserObjs
+var clustObjArray; // NEWER
+
+// Flag to add new clusterObj
+var clustFlag; // NEWER
+
 // MARK: - Functions
 // Functions all prefixed with "map" to avoid namespace collisions
+
+// ----------------------------------------------------------------
+// mapReset - redisplays the map and clears the screen
+// ----------------------------------------------------------------
+
+function mapReset() {
+    var y = document.getElementById('info'); 
+    if (y.style.display === 'block') {
+        y.style.display = 'none';
+    }
+    var x = document.getElementById(MAP_DIV_ID);
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    }
+    var z = document.getElementById('button');
+    if (z.style.display === 'none') {
+        z.style.display = 'block';
+    }
+    while (y.childElementCount !== 1) {
+        y.removeChild(y.lastChild);
+    }
+
+}
+
+// ----------------------------------------------------------------
+// mapCreateInfoPage - Creates a new page using information from
+//                     the passed in ClusterObjIndex 
+// @param clustObjInd - var to grab correct cluster object
+// ----------------------------------------------------------------
+
+function mapCreateInfoPage(clustObjInd) {
+    var x = document.getElementById(MAP_DIV_ID);
+    x.style.display = 'none';
+    var z = document.getElementById('button');
+    z.style.display = 'none';
+    var y = document.getElementById('info');
+    y.style.display = 'block';
+
+    console.log(clustObjArray[clustObjInd].arr.length);
+    for(var j = 0; j < clustObjArray[clustObjInd].arr.length; j++) {
+        var tempImg = clustObjArray[clustObjInd].arr[j].img;
+        var elem = document.createElement("img");
+        elem.src =  tempImg.src;
+        document.getElementById("info").appendChild(elem); 
+    }
+}
 
 // ----------------------------------------------------------------
 // mapLoadTestImages - only invoked when debugging, populates
@@ -58,9 +145,27 @@ function mapLoadTestImages() {
 
 function mapLoadComplete() {
     mapLoadCompleteFlag = true;
-    if (imageUploadCompleteFlag) {
+    if (DEBUG || imageUploadCompleteFlag) {
+        if (!DEBUG) {
+            mapImgElements = imgArray;
+        }
+        mapSwitchView();
         mapInit();
     }
+}
+
+// ----------------------------------------------------------------
+// mapSwitchView - removes HTML elements associated with file
+//                 upload and inserts map div
+// ----------------------------------------------------------------
+
+function mapSwitchView() {
+   document.getElementsByClassName(IMAGE_CONTEXT_CLASS_NAME).forEach(function (imageElement) {
+       imageElement.style.display = "none";
+   });
+   document.getElementsByClassName(MAP_ELEMENT_CLASS_NAME).forEach(function (mapElement) {
+       mapElement.style.display = "inline";
+   });
 }
 
 // ----------------------------------------------------------------
@@ -77,6 +182,8 @@ function mapInit() {
     mapCenter = {lat: 0.0, lng: 0.0};
     mapMarkers = [];
     mapMarkerLocations = [];
+    mapMarkImage = []; // NEW
+    clustObjArray = []; // NEWER
     mapImageProcessCounter = 0;
     for (var imageIndex = 0; imageIndex < mapImgElements.length; imageIndex++) {
         if (mapImgElements[imageIndex].complete) {
@@ -89,7 +196,6 @@ function mapInit() {
     }
 }
 
-
 // ----------------------------------------------------------------
 // mapReadImageMetadata - img onload callback, populates location
 //                        array with image metadata and updates
@@ -99,6 +205,7 @@ function mapInit() {
 
 function mapReadImageMetadata(image) {
     if (!EXIF.getData(image, function () {
+        clustFlag = false; // NEWER
         var lat = EXIF.getTag(this, "GPSLatitude");
         var latRef = EXIF.getTag(this, "GPSLatitudeRef");
         var lng = EXIF.getTag(this, "GPSLongitude");
@@ -111,6 +218,25 @@ function mapReadImageMetadata(image) {
             mapCenter.lat = (mapCenter.lat * n + photoLocation.lat) / (n + 1.0);
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1.0);
             mapMarkerLocations.push(photoLocation);
+			mapMarkImage.push(this); // NEW
+            var newImgObj = new imageObj(photoLocation.lat, photoLocation.lng, this); 
+            if (clustObjArray.length === 0) { 
+                var newclustObj = new clustObj(newImgObj); 
+                clustObjArray.push(newclustObj) 
+            }
+            else { 
+                for(var i = 0; i < clustObjArray.length; i++) { 
+                    if ( Math.abs(clustObjArray[i].avgLat - newImgObj.lat) <.1 && Math.abs(clustObjArray[i].avgLng - newImgObj.lng) < .1) { 
+                        clustObjArray[i].add(newImgObj); 
+                        clustFlag = true; 
+                        break;
+                    }
+                }
+                if (!clustFlag) {
+                    var newclustObj = new clustObj(newImgObj); 
+                    clustObjArray.push(newclustObj) 
+                }
+            }
         }
         mapImageProcessCounter++;
         if (mapImageProcessCounter == mapImgElements.length) {
@@ -131,44 +257,37 @@ function mapReadImageMetadata(image) {
 // ----------------------------------------------------------------
 
 function mapPopulate() {
+    var img;
+    var marker;
     mapResizeDiv();
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
     window.onresize = mapResizeDiv;
-//    for (var markerIndex = 0; markerIndex < mapMarkerLocations.length; markerIndex++) {
-//  var tempImage = mapMarkerLocations[markerIndex].img; 
-//  '<img src = ' + tempImage.src + '>' + '</img>'
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
+	for (var i = 0; i < clustObjArray.length; i++) {
+        var contentString = ""; 
+        for(var j = 0; j < clustObjArray[i].arr.length; j++) {
+            img = clustObjArray[i].arr[j].img;
+            contentString += "<img width='80' src =" + img.src + ">"; // NEW      
+        }
+        console.log("length of cluster");
+        console.log(i);
+        console.log(clustObjArray[i].arr.length);
+
+        var avgLocation = {lat: clustObjArray[i].avgLat, lng: clustObjArray[i].avgLng};
+        marker = new google.maps.Marker({
+            position: avgLocation,
+            map: map,
+            contentString: contentString}
+        );
+        var infowindow = new google.maps.InfoWindow({});
+        marker.addListener('click', function() {
+            infowindow.setContent(this.contentString);
+            infowindow.open(map, this);
+            map.setCenter(this.getPosition()); 
         });
-        var markerObject = new google.maps.Marker({
-            position: mapMarkerLocations[0], 
-            map: map
-        });
-//        mapMarkers.push(markerObject);
-        markerObject.addListener('click', function() {
-            infowindow.open(map, marker);
-        });
-//    }
+        mapMarkers.push(marker);      
+    }
+    console.log("length of clust object array");
+    console.log(clustObjArray.length);
 }
 
 // ----------------------------------------------------------------
@@ -203,6 +322,4 @@ function mapResizeDiv() {
 // MARK: - Script
 if (DEBUG) {
     mapLoadTestImages();
-} else {
-    mapImgElements = imgArray;
 }

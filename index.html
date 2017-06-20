@@ -7,7 +7,7 @@
 			height: 400px;
             width: 100%;
 		}
-        .testImage, .uploadedImage {
+        .mapElements, .uploadedImage, #info {
             display: none;
         }
 	</style>
@@ -16,16 +16,19 @@
     <script type="text/javascript" src="src/map.js"> </script>
     <script type="text/javascript" src="src/imageUpload.js"> </script>
 </head>
-<body id="testBody" onload="imageUpload()">
-    <input type ="file" id="myFile" multiple size="50" onchange="imageUpload()">
-    <p id="uploadedImageInfo"></p>
-	<div id="map"></div>
-    <button onclick="imageUploadComplete()">Finished</button>
-    <img class="testImage" src="img/IMG_0250.jpg" height="100px" width="100px">
-	<img class="testImage" src="img/IMG_0251.jpg" height="100px" width="100px">
-	<img class="testImage" src="img/IMG_0252.jpg" height="100px" width="100px">
-	<img class="testImage" src="img/IMG_0253.jpg" height="100px" width="100px">
-	<img class="testImage" src="img/IMG_0254.jpg" height="100px" width="100px">
+<body onload="imageUpload()">
+    <input class="imageElements" type="file" id="myFile" multiple size="50" onchange="imageUpload()">
+    <p class="imageElements" id="uploadedImageInfo"></p>
+    <button class="imageElements" onclick="imageUploadComplete()">Finished</button>
+	<div class="mapElements" id="map"></div>
+    <div id="info">
+            <button onclick="mapReset()">Reset</button>
+    </div>
+    <img class="mapElements" src="img/IMG_0250.jpg" height="100px" width="100px">
+	<img class="mapElements" src="img/IMG_0251.jpg" height="100px" width="100px">
+	<img class="mapElements" src="img/IMG_0252.jpg" height="100px" width="100px">
+	<img class="mapElements" src="img/IMG_0253.jpg" height="100px" width="100px">
+	<img class="mapElements" src="img/IMG_0254.jpg" height="100px" width="100px">
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU&callback=mapLoadComplete"> </script>
 </body>
 </html>
