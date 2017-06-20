@@ -68,7 +68,7 @@ function imageViewUnload() {
 // @return - a function to assign to the FileReader's onload
 // ----------------------------------------------------------------
 
-function createImageListItemWithFile(file) {
+function createImageListItemWithFile(file, i) {
     return function(fileLoadedEvent) {
         var imageLoadedObject = new Image();
         imageLoadedObject.src = fileLoadedEvent.target.result;
@@ -140,7 +140,7 @@ function imageUpload() {
                 var file = x.files[i];
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
-                    fileReader.onload = createImageListItemWithFile(file);
+                    fileReader.onload = createImageListItemWithFile(file, i);
                     fileReader.readAsDataURL(file);
                 }
                 
