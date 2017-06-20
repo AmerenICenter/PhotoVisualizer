@@ -25,7 +25,7 @@
     <input class="imageElements" type="file" id="fileUpload" multiple size="50" onchange="imageUpload()">
     <p class="imageElements" id="uploadedImageInfo"></p>
     <button class="imageElements" onclick="imageUploadComplete()">Finished</button>
-    <button class="mapElements" onclick="mapViewUnload(); imageViewLoad();">Back</button>
+    <button class="mapElements" id="mapButton" onclick="mapViewUnload(); imageViewLoad();">Back</button>
 	<div class="mapElements" id="map"></div>
     <div id="info">
             <button onclick="mapReset()">Reset</button>
