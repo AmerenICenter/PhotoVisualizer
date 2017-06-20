@@ -54,9 +54,6 @@ function imageUpload(){
                     txt += "size: " + file.size + " bytes <br>";
                 }
             }
-            for (var i = 0; i < x.files.length; i++) {
-                fileReader.readAsDataURL(imgArray[i]);
-            }
         }
     } else {
         if (x.value == "") {
