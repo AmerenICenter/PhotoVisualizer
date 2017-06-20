@@ -38,7 +38,6 @@ function imageUpload(){
                         var imageLoaded = document.createElement("img");
                         imageLoaded.src = fileLoadedEvent.target.result;
                         imageLoaded.className = "uploadedImage";
-                        console.log(fileLoadedEvent.target.result);
                         var imageLoadedObject = new Image();
                         imageLoadedObject.src = fileLoadedEvent.target.result;
                         imgArray.push(imageLoadedObject);

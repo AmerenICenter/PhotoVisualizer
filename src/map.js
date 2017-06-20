@@ -119,7 +119,6 @@ function mapCreateInfoPage(clustObjInd) {
     var y = document.getElementById('info');
     y.style.display = 'block';
 
-    console.log(clustObjArray[clustObjInd].arr.length);
     for(var j = 0; j < clustObjArray[clustObjInd].arr.length; j++) {
         var tempImg = clustObjArray[clustObjInd].arr[j].img;
         var elem = document.createElement("img");
@@ -268,8 +267,7 @@ function mapPopulate() {
             img = clustObjArray[i].arr[j].img;
             contentString += "<img width='80' src =" + img.src + ">"; // NEW      
         }
-        console.log("length of cluster");
-        console.log(i);
+        console.log("length of cluster" + i);
         console.log(clustObjArray[i].arr.length);
 
         var avgLocation = {lat: clustObjArray[i].avgLat, lng: clustObjArray[i].avgLng};
