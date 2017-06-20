@@ -109,8 +109,7 @@ function mapReset() {
 // ----------------------------------------------------------------
 
 function mapCreateInfoPage(clustObjInd) {
-    var x = document.getElementById(MAP_DIV_ID);
-    x.style.display = 'none';
+    mapViewUnload();
     var y = document.getElementById('info');
     y.style.display = 'block';
 
