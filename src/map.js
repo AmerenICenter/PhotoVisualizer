@@ -95,10 +95,6 @@ function mapReset() {
     if (x.style.display === 'none') {
         x.style.display = 'block';
     }
-    var z = document.getElementById('button');
-    if (z.style.display === 'none') {
-        z.style.display = 'block';
-    }
     while (y.childElementCount !== 1) {
         y.removeChild(y.lastChild);
     }
@@ -114,8 +110,6 @@ function mapReset() {
 function mapCreateInfoPage(clustObjInd) {
     var x = document.getElementById(MAP_DIV_ID);
     x.style.display = 'none';
-    var z = document.getElementById('button');
-    z.style.display = 'none';
     var y = document.getElementById('info');
     y.style.display = 'block';
 
