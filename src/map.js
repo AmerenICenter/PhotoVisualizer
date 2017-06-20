@@ -152,7 +152,7 @@ function mapLoadComplete() {
 function mapViewLoad() {
    var mapViewElements = document.getElementsByClassName(MAP_VIEW_CLASS_NAME);
    for (var mapViewIndex = 0; mapViewIndex < mapViewElements.length; mapViewIndex++) {
-       mapViewElements[mapViewIndex].style.display = "initial";
+       mapViewElements[mapViewIndex].style.display = "block";
    }
 }
 
