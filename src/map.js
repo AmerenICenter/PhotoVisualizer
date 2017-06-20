@@ -162,7 +162,7 @@ function mapSwitchView() {
    }
    var mapContextElements = document.getElementsByClassName(MAP_CONTEXT_CLASS_NAME);
    for (var mapContextIndex = 0; mapContextIndex < mapContextElements.length; mapContextIndex++) {
-       mapContextElements[mapContextIndex].style.display = "inline";
+       mapContextElements[mapContextIndex].style.display = "block";
    }
 }
 
