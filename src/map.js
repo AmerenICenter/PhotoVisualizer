@@ -159,11 +159,11 @@ function mapSwitchView() {
    var imageContextElements = document.getElementsByClassName(IMAGE_CONTEXT_CLASS_NAME);
    for (var imageContextIndex = 0; imageContextIndex < imageContextElements.length; imageContextIndex++) {
        imageContextElements[imageContextIndex].style.display = "none";
-   });
+   }
    var mapContextElements = document.getElementsByClassName(MAP_CONTEXT_CLASS_NAME);
    for (var mapContextIndex = 0; mapContextIndex < mapContextElements.length; mapContextIndex++) {
        mapContextElements[mapContextIndex].style.display = "inline";
-   });
+   }
 }
 
 // ----------------------------------------------------------------
