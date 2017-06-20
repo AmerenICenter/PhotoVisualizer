@@ -7,7 +7,7 @@ var imgArray = new Array();
 // imageUploadComplete - button trigger function, signals user
 //                       has finished uploading photos; if at least
 //                       one photo has been uploaded and map has
-//                       loaded, calls mapInit
+//                       loaded, calls mapSwitchView and mapInit
 // ----------------------------------------------------------------
 
 function imageUploadComplete() {
@@ -15,7 +15,7 @@ function imageUploadComplete() {
         imageUploadCompleteFlag = true;
     }
     if (imageUploadCompleteFlag && mapLoadCompleteFlag) {
-
+        mapSwitchView();
         mapInit();
     }
 }
