@@ -146,10 +146,12 @@ function mapLoadComplete() {
 // ----------------------------------------------------------------
 
 function mapViewLoad() {
-   var mapViewElements = document.getElementsByClassName(MAP_VIEW_CLASS_NAME);
-   for (var mapViewIndex = 0; mapViewIndex < mapViewElements.length; mapViewIndex++) {
+    var mapViewElements = document.getElementsByClassName(MAP_VIEW_CLASS_NAME);
+    for (var mapViewIndex = 0; mapViewIndex < mapViewElements.length; mapViewIndex++) {
        mapViewElements[mapViewIndex].style.display = "block";
-   }
+    }
+    mapResizeDiv();
+    window.onresize = mapResizeDiv;
 }
 
 // ----------------------------------------------------------------
@@ -256,9 +258,7 @@ function mapReadImageMetadata(image) {
 function mapPopulate() {
     var img;
     var marker;
-    mapResizeDiv();
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
-    window.onresize = mapResizeDiv;
 	for (var i = 0; i < clustObjArray.length; i++) {
         var contentString = ""; 
         for(var j = 0; j < clustObjArray[i].arr.length; j++) {

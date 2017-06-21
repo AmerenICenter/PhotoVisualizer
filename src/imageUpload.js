@@ -3,7 +3,8 @@
 // Image view element class name
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 
-var IMAGE_LIST_ID_NAME = "imageInfoListView";
+var IMAGE_LIST_ID = "imageInfoListView";
+var IMAGE_CONTENT_ID = "imageContentView";
 
 // MARK: - Global Variables
 // variables prefixed with "image" to avoid namespace collisions
@@ -45,11 +46,13 @@ function imageUploadComplete() {
 // ----------------------------------------------------------------
 
 function imageViewLoad() {
-   var imageViewElements = document.getElementsByClassName(IMAGE_VIEW_CLASS_NAME);
-   for (var imageViewIndex = 0; imageViewIndex < imageViewElements.length; imageViewIndex++) {
+    var imageViewElements = document.getElementsByClassName(IMAGE_VIEW_CLASS_NAME);
+    for (var imageViewIndex = 0; imageViewIndex < imageViewElements.length; imageViewIndex++) {
        imageViewElements[imageViewIndex].style.display = "block";
-   }
-   imageUploadCompleteFlag = false;
+    }
+    imageUploadCompleteFlag = false;
+    imageResizeDiv();
+    window.onresize = imageResizeDiv;
 }
 
 // ----------------------------------------------------------------
@@ -105,8 +108,7 @@ function imageCreateListItem(file) {
             imageListDelete.className = "imageInfoListDeleteButton";
             imageListItem.appendChild(imageListDelete);
 
-            document.getElementById(IMAGE_LIST_ID_NAME).appendChild(imageListItem);
-
+            document.getElementById(IMAGE_LIST_ID).appendChild(imageListItem);
         }
     };
 }
@@ -173,4 +175,15 @@ function imageUpload() {
         responseElement.display = "block";
         responseElement.innerHTML = txt;
     }
+}
+
+// ----------------------------------------------------------------
+// imageResizeDiv - resizes grey enclosing div for image list to
+//                  size of screen (this is necessary so the inner
+//                  div can scroll
+// ----------------------------------------------------------------
+
+function imageResizeDiv() {
+    var imageDiv = document.getElementById(IMAGE_CONTENT_VIEW_ID);
+    mapDiv.style.height = (window.innerHeight - 16) + "px";
 }

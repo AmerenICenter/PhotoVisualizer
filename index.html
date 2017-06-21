@@ -16,6 +16,7 @@
         }
         #imageContentView {
             width: 90%;
+            height: 400px;
             margin: auto;
             padding: 8px;
             border-color: #555555;
@@ -25,6 +26,7 @@
         #imageInfoListView {
             margin: 8px 0;
             border-radius: 8px;
+            overflow: auto;
             background-color: white;
         }
         .imageInfoListItem {
@@ -71,10 +73,10 @@
     <script type="text/javascript" src="src/map.js"> </script>
     <script type="text/javascript" src="src/imageUpload.js"> </script>
 </head>
-<body onload="imageUpload()">
+<body onload="imageUploadInit(); imageUpload();">
     <div class="imageElements">
         <div id="imageContentView">
-            <input type="file" id="fileUpload" multiple size="50" onchange="imageUpload()">
+            <input type="file" id="fileUpload" accept="image/*" multiple size="50" onchange="imageUpload()">
             <div id="imageInfoListView">
                 <p id="imageUploadInfo"></p>
             </div>
