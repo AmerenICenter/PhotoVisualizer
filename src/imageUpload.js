@@ -4,7 +4,7 @@
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 
 var IMAGE_LIST_ID = "imageInfoListView";
-var IMAGE_CONTENT_ID = "imageContentView";
+var IMAGE_CONTENT_VIEW_ID = "imageContentView";
 
 // MARK: - Global Variables
 // variables prefixed with "image" to avoid namespace collisions
