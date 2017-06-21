@@ -11,6 +11,9 @@
         .imageElements {
             width: 100%;
         }
+        #imageUploadInput {
+            margin-right: 8px;
+        }
         #imageUploadCompleteButton {
             display: inline-block;
             float: right;
@@ -67,9 +70,6 @@
         .mapElements, .imageUpload, .testImage, #info {
             display: none;
         }
-        #imageUpload {
-            margin: auto;
-        }
 	</style>
     <script type="text/javascript" src="src/titleIncrementer.js"> </script>
     <script type="text/javascript" src="src/exif.js"> </script>
@@ -79,7 +79,7 @@
 <body onload="imageViewLoad(); imageUpload();">
     <div class="imageElements">
         <div id="imageContentView">
-            <input type="file" id="imageUpload" accept="image/*" multiple size="50" onchange="imageUpload()">
+            <input type="file" id="imageUploadInput" accept="image/*" multiple size="50" onchange="imageUpload()">
             <button id="imageUploadCompleteButton" onclick="imageUploadComplete()">Finished</button>
             <div id="imageInfoListView">
                 <p id="imageUploadInfo"></p>
