@@ -211,7 +211,7 @@ function mapReadImageMetadata(image) {
         var lng = EXIF.getTag(this, "GPSLongitude");
         var lngRef = EXIF.getTag(this, "GPSLongitudeRef");
         // Image metadata has all requested tags in expected format
-        if ((lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
+        if (lat != null && lng != null && (lat.constructor === Array && lat.length == 3) && typeof latRef === "string" &&
             (lng.constructor === Array && lng.length == 3) && typeof lngRef === "string") {
             var photoLocation = {lat: mapConvertDMS(lat, latRef), lng: mapConvertDMS(lng, lngRef)};
             var n = mapMarkers.length;
