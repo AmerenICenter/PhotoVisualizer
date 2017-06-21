@@ -64,14 +64,14 @@ function imageViewUnload() {
 }
 
 // ----------------------------------------------------------------
-// createImageListItem - returns file load callback function that
+// imageCreateListItem - returns file load callback function that
 //                       creates list entry including both photo
 //                       and file info
 // @param file - the file associated with this list entry
 // @return - a function to assign to the FileReader's onload
 // ----------------------------------------------------------------
 
-function createImageListItem(file) {
+function imageCreateListItem(file) {
     return function(fileLoadedEvent) {
         if (!('name' in file) || !imageFilenameArray.includes(file.name)) {
             var imageLoadedObject = new Image();
@@ -101,7 +101,7 @@ function createImageListItem(file) {
 
             var imageListDelete = document.createElement("img");
             imageListDelete.src = "img/ImageDeleteIcon.png";
-            imageListDelete.onclick = imageDeleteEntry(imageListItem, imageLoadedObject);
+            imageListDelete.onclick = imageDeleteListItem(imageListItem, imageLoadedObject, file);
             imageListDelete.className = "imageInfoListDeleteButton";
             imageListItem.appendChild(imageListDelete);
 
@@ -112,19 +112,25 @@ function createImageListItem(file) {
 }
 
 // ----------------------------------------------------------------
-// imageDeleteEntry - delete icon onclick function generator
+// imageDeleteListItem - delete icon onclick function generator
 // @param imageItem - HTML DOM image list item to delete when
 //                    button is pressed
 // @param imageObject - Javascript image object to delete from
 //                      array (again, when the button is pressed)
+// @param imageFile - File object containing image filename
+//                    to delete from other array
 // @return - function to assign to delete icon's onclick
 // ----------------------------------------------------------------
 
-function imageDeleteEntry(imageItem, imageObject) {
+function imageDeleteListItem(imageItem, imageObject, imageFile) {
     return function() {
         imageItem.parentNode.removeChild(imageItem);
         var imageObjectIndex = imageArray.findIndex(function(otherObject) { return imageObject == otherObject; });
         imageArray.splice(imageObjectIndex, 1);
+        if ('name' in imageFile) {
+            var imageFilenameIndex = imageFilenameArray.findIndex(function(otherFilename) { return imageFile.name == otherFilename; });
+            imageFilenameArray.splice(imageFilenameIndex, 1);
+        }
     }
 }
 
@@ -147,7 +153,7 @@ function imageUpload() {
                 var file = x.files[i];
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
-                    fileReader.onload = createImageListItem(file);
+                    fileReader.onload = imageCreateListItem(file);
                     fileReader.readAsDataURL(file);
                 }
                 
