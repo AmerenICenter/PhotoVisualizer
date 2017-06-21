@@ -261,12 +261,12 @@ function mapPopulate() {
     var marker;
     map = new google.maps.Map(document.getElementById(MAP_DIV_ID), {zoom: 8, center: mapCenter});
 	for (var i = 0; i < clustObjArray.length; i++) {
-        var contentString = ""; 
-        for(var j = 0; j < clustObjArray[i].arr.length; j++) {
-            img = clustObjArray[i].arr[j].img;
-            contentString += "<img class='mapDetailViewImage' width='80' src =" + img.src + "><br>"; // NEW      
+        img = clustObjArray[i].arr[0].img;
+        contentString = "<img class='mapDetailViewImage' width='80' src =" + img.src + "><br>"; // NEW      
+        if (clustObjArray[i].arr.length > 1) {
+            contentString += "<p>and " + (clustObjArray[i].arr.length - 1) + " more.</p><br>";
         }
-        contentString += "<button class='mapDetailViewButton' type='button' onclick='mapCreateInfoPage(" + i +  ")'>Click Me</button>"; 
+        contentString += "<button class='mapDetailViewButton' type='button' onclick='mapCreateInfoPage(" + i +  ")'>View in Detail</button>"; 
 
         var avgLocation = {lat: clustObjArray[i].avgLat, lng: clustObjArray[i].avgLng};
         marker = new google.maps.Marker({
