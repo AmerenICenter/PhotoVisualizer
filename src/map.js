@@ -12,7 +12,7 @@ var MAP_VIEW_CLASS_NAME = "mapElements";
 
 var MAP_CONTAINER_DIV_ID = "mapContentView";
 var MAP_DIV_ID = "map";
-var MAP_BUTTON_ID = "mapButton";
+var MAP_BUTTON_ID = "mapBackButton";
 
 var SITE_LIST_ID = "siteInfoListItemFrame";
 
