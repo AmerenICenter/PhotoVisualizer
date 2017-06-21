@@ -10,6 +10,7 @@ var TEST_IMAGE_CLASS_NAME = "testImage";
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 var MAP_VIEW_CLASS_NAME = "mapElements";
 
+var MAP_CONTAINER_DIV_ID = "mapContentView";
 var MAP_DIV_ID = "map";
 var MAP_BUTTON_ID = "mapButton";
 
@@ -309,9 +310,11 @@ function mapConvertDMS(dms, ref) {
 // ----------------------------------------------------------------
 
 function mapResizeDiv() {
+    var mapContainerDiv = document.getElementById(MAP_CONTAINER_DIV_ID);
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
-    mapDiv.style.height = (window.innerHeight - mapBackButton.offsetHeight - 25) + "px";
+    mapContainerDiv.style.height = (window.innerHeight - 17) + "px";
+    mapDiv.style.height = (mapContainerDiv.style.height - mapBackButton.offsetHeight - 24) + "px";
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }

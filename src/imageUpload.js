@@ -51,8 +51,8 @@ function imageViewLoad() {
        imageViewElements[imageViewIndex].style.display = "block";
     }
     imageUploadCompleteFlag = false;
-    //imageResizeDiv();
-    window.onresize = imageResizeDiv;
+    // imageResizeDiv();
+    // window.onresize = imageResizeDiv;
 }
 
 // ----------------------------------------------------------------
