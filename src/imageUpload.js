@@ -185,6 +185,6 @@ function imageUpload() {
 
 function imageResizeDiv() {
     var imageDiv = document.getElementById(IMAGE_CONTENT_VIEW_ID);
-    imageDiv.style.max-height = (window.innerHeight - 32) + "px";
+    imageDiv.style.maxHeight = (window.innerHeight - 32) + "px";
     console.log(window.innerHeight - 32);
 }
