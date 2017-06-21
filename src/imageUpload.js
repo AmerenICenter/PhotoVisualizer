@@ -12,7 +12,10 @@ var IMAGE_LIST_ID_NAME = "imageInfoListView";
 var imageUploadCompleteFlag = false;
 
 // Array to hold Javascript image objects
-var imageArray = new Array();
+var imageArray = [];
+
+// Array of filenames, to prevent duplicate importation
+var imageFilenameArray = [];
 
 // MARK: - Functions
 // Functions prefixed with "image" to avoid namespace collisions
@@ -61,47 +64,50 @@ function imageViewUnload() {
 }
 
 // ----------------------------------------------------------------
-// createImageListItemWithFile - returns file load callback
-//                               function that creates list
-//                               entry including both photo
-//                               and file info
+// createImageListItem - returns file load callback function that
+//                       creates list entry including both photo
+//                       and file info
 // @param file - the file associated with this list entry
 // @return - a function to assign to the FileReader's onload
 // ----------------------------------------------------------------
 
-function createImageListItemWithFile(file) {
+function createImageListItem(file) {
     return function(fileLoadedEvent) {
-        var imageLoadedObject = new Image();
-        imageLoadedObject.src = fileLoadedEvent.target.result;
-        imageArray.push(imageLoadedObject);
+        if (!('name' in file) || !imageFilenameArray.includes(file.name)) {
+            var imageLoadedObject = new Image();
+            imageLoadedObject.src = fileLoadedEvent.target.result;
+            imageArray.push(imageLoadedObject);
 
-        var imageListItem = document.createElement("div");
-        imageListItem.className = "imageInfoListItem";
-        
-        var imageListImg = document.createElement("img");
-        imageListImg.src = fileLoadedEvent.target.result;
-        imageListImg.className = "imageInfoListImage";
-        imageListItem.appendChild(imageListImg);
+            var imageListItem = document.createElement("div");
+            imageListItem.className = "imageInfoListItem";
+            
+            var imageListImg = document.createElement("img");
+            imageListImg.src = fileLoadedEvent.target.result;
+            imageListImg.className = "imageInfoListImage";
+            imageListItem.appendChild(imageListImg);
 
-        var imageListDescription = document.createElement("div");
-        imageListDescription.className = "imageInfoListDescription";
-        var descTxt = "<strong>Image</strong><br>";
-        if ('name' in file) {
-            descTxt = "<strong>" + file.name + "</strong><br>";
+            var imageListDescription = document.createElement("div");
+            imageListDescription.className = "imageInfoListDescription";
+            var descTxt = "<strong>Image</strong><br>";
+            if ('name' in file) {
+                descTxt = "<strong>" + file.name + "</strong><br>";
+                imageFilenameArray.push(file.name);
+            }
+            if ('size' in file) {
+                descTxt += "size: " + file.size + " bytes";
+            }
+            imageListDescription.innerHTML = descTxt;
+            imageListItem.appendChild(imageListDescription);
+
+            var imageListDelete = document.createElement("img");
+            imageListDelete.src = "img/ImageDeleteIcon.png";
+            imageListDelete.onclick = imageDeleteEntry(imageListItem, imageLoadedObject);
+            imageListDelete.className = "imageInfoListDeleteButton";
+            imageListItem.appendChild(imageListDelete);
+
+            document.getElementById(IMAGE_LIST_ID_NAME).appendChild(imageListItem);
+
         }
-        if ('size' in file) {
-            descTxt += "size: " + file.size + " bytes";
-        }
-        imageListDescription.innerHTML = descTxt;
-        imageListItem.appendChild(imageListDescription);
-
-        var imageListDelete = document.createElement("img");
-        imageListDelete.src = "img/ImageDeleteIcon.png";
-        imageListDelete.onclick = imageDeleteEntry(imageListItem, imageLoadedObject);
-        imageListDelete.class = "imageInfoListDeleteButton";
-        imageListItem.appendChild(imageListDelete);
-
-        document.getElementById(IMAGE_LIST_ID_NAME).appendChild(imageListItem);
     };
 }
 
@@ -141,7 +147,7 @@ function imageUpload() {
                 var file = x.files[i];
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
-                    fileReader.onload = createImageListItemWithFile(file);
+                    fileReader.onload = createImageListItem(file);
                     fileReader.readAsDataURL(file);
                 }
                 
