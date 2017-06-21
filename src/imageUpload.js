@@ -144,7 +144,7 @@ function imageDeleteListItem(imageItem, imageObject, imageFile) {
 
 function imageUpload() {
     console.log("imageUpload input state changed.");
-    var x = document.getElementById("fileUpload");
+    var x = document.getElementById("imageUploadInput");
     var txt = "";
     var longDecimal = 0;
     var latDecimal = 0;
