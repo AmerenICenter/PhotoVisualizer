@@ -11,6 +11,11 @@
         .imageElements {
             width: 100%;
         }
+        #imageUploadCompleteButton {
+            display: inline-block;
+            float: right;
+            margin-right: 8px;
+        }
         #imageUploadInfo {
             display: none;
         }
@@ -18,7 +23,6 @@
             width: 90%;
             margin: auto;
             padding: 8px;
-            overflow: hidden;
             border-color: #555555;
             border-radius: 8px;
             background-color: #CCCCCC;
@@ -26,7 +30,6 @@
         #imageInfoListView {
             margin: 8px 0;
             border-radius: 8px;
-            overflow: auto;
             background-color: white;
         }
         .imageInfoListItem {
@@ -64,7 +67,7 @@
         .mapElements, .imageUpload, .testImage, #info {
             display: none;
         }
-        #fileUpload {
+        #imageUpload {
             margin: auto;
         }
 	</style>
@@ -76,12 +79,12 @@
 <body onload="imageViewLoad(); imageUpload();">
     <div class="imageElements">
         <div id="imageContentView">
-            <input type="file" id="fileUpload" accept="image/*" multiple size="50" onchange="imageUpload()">
+            <input type="file" id="imageUpload" accept="image/*" multiple size="50" onchange="imageUpload()">
+            <button id="imageUploadCompleteButton" onclick="imageUploadComplete()">Finished</button>
             <div id="imageInfoListView">
                 <p id="imageUploadInfo"></p>
                 <div id="imageInfoListItemFrame"></div>
             </div>
-            <button onclick="imageUploadComplete()">Finished</button>
         </div>
     </div>
     <div class="mapElements">
