@@ -7,11 +7,10 @@
             background-color: #6BB835;
         }
         
-        // MARK: - Image Upload View Constraints
-        .imageElements {
+        .imageElements, .mapElements{
             width: 100%;
         }
-        #imageUploadInput {
+        #imageUploadInput, #mapButton {
             margin-right: 8px;
         }
         #imageUploadCompleteButton {
@@ -22,7 +21,7 @@
         #imageUploadInfo {
             display: none;
         }
-        #imageContentView {
+        #imageContentView, #mapContentView {
             width: 90%;
             margin: auto;
             padding: 8px;
@@ -61,12 +60,10 @@
 
         #map {
 			height: 400px;
-            width: 90%;
-            margin: 8px auto;
+            width: 100%;
+            margin: 8px 0;
+            border-radius: 8px;
 		}
-        #mapButton {
-            margin: 0 auto;
-        }
         .mapElements, .imageUpload, .testImage, #info {
             display: none;
         }
@@ -88,8 +85,10 @@
         </div>
     </div>
     <div class="mapElements">
-        <button id="mapButton" onclick="mapViewUnload(); imageViewLoad();">Back</button>
-        <div id="map"></div>
+        <div id="mapContentView">
+            <button id="mapButton" onclick="mapViewUnload(); imageViewLoad();">Back</button>
+            <div id="map"></div>
+        </div>
     </div>
     <div class="infoElements" id="info">
             <button onclick="mapReset()">Reset</button>
