@@ -10,7 +10,7 @@
         .imageElements, .mapElements{
             width: 100%;
         }
-        #imageUploadCompleteButton {
+        #imageUploadCompleteButton, #mapRecenterButton {
             display: inline-block;
             float: right;
         }
@@ -55,13 +55,21 @@
             display: inline-block;
             margin: 8px;
         }
-
         #map {
 			height: 400px;
             width: 100%;
             margin: 8px 0;
             border-radius: 8px;
 		}
+        .mapDetailViewImage {
+            width: 64px;
+            height: 64px;
+            margin: 8px auto 0 auto;
+        }
+        .mapDetailViewButton {
+            margin: 8px auto;
+        }
+
         .mapElements, .imageUpload, .testImage, #info {
             display: none;
         }

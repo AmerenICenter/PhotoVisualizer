@@ -264,9 +264,9 @@ function mapPopulate() {
         var contentString = ""; 
         for(var j = 0; j < clustObjArray[i].arr.length; j++) {
             img = clustObjArray[i].arr[j].img;
-            contentString += "<img width='80' src =" + img.src + ">"; // NEW      
+            contentString += "<img class='mapDetailViewImage' width='80' src =" + img.src + ">"; // NEW      
         }
-        contentString += "<button type='button' onclick='mapCreateInfoPage(" + i +  ")'>Click Me</button>"; 
+        contentString += "<button class='mapDetailViewButton' type='button' onclick='mapCreateInfoPage(" + i +  ")'>Click Me</button>"; 
 
         var avgLocation = {lat: clustObjArray[i].avgLat, lng: clustObjArray[i].avgLng};
         marker = new google.maps.Marker({
