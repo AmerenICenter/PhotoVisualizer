@@ -264,7 +264,7 @@ function mapPopulate() {
         var contentString = ""; 
         for(var j = 0; j < clustObjArray[i].arr.length; j++) {
             img = clustObjArray[i].arr[j].img;
-            contentString += "<img class='mapDetailViewImage' width='80' src =" + img.src + ">"; // NEW      
+            contentString += "<img class='mapDetailViewImage' width='80' src =" + img.src + "><br>"; // NEW      
         }
         contentString += "<button class='mapDetailViewButton' type='button' onclick='mapCreateInfoPage(" + i +  ")'>Click Me</button>"; 
 
