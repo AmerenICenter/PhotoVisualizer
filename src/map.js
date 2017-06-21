@@ -310,8 +310,8 @@ function mapResizeDiv() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
     mapContainerDiv.style.height = (window.innerHeight - 34) + "px";
-    mapDiv.style.height = (mapContainerDiv.style.height - mapBackButton.offsetHeight - 24) + "px";
-    console.log(mapContainerDiv.style.height - mapBackButton.offsetHeight - 24);
+    mapDiv.style.height = (window.innerHeight - mapBackButton.offsetHeight - 58) + "px";
+    console.log(window.innerHeight - mapBackButton.offsetHeight - 58);
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }
