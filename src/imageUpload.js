@@ -51,7 +51,7 @@ function imageViewLoad() {
        imageViewElements[imageViewIndex].style.display = "block";
     }
     imageUploadCompleteFlag = false;
-    imageResizeDiv();
+    //imageResizeDiv();
     window.onresize = imageResizeDiv;
 }
 
@@ -177,6 +177,7 @@ function imageUpload() {
     }
 }
 
+/*
 // ----------------------------------------------------------------
 // imageResizeDiv - resizes grey enclosing div for image list to
 //                  size of screen (this is necessary so the inner
@@ -188,3 +189,4 @@ function imageResizeDiv() {
     imageDiv.style.maxHeight = (window.innerHeight - 32) + "px";
     console.log(window.innerHeight - 32);
 }
+*/
