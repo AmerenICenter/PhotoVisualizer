@@ -3,7 +3,7 @@
 // Image view element class name
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 
-var IMAGE_LIST_ID = "imageInfoListView";
+var IMAGE_LIST_ID = "imageInfoListItemFrame";
 var IMAGE_CONTENT_VIEW_ID = "imageContentView";
 
 // MARK: - Global Variables
