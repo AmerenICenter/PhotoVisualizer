@@ -121,7 +121,7 @@ function mapCreateInfoPage(clustObjInd) {
         siteListItem.className = "siteInfoListItem";
         
         var siteListImg = document.createElement("img");
-        siteListImg.src = tempImg.img;
+        siteListImg.src = tempImg.src;
         siteListImg.className = "siteInfoListImage";
         siteListItem.appendChild(siteListImg);
 
