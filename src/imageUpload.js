@@ -6,12 +6,13 @@ var IMAGE_VIEW_CLASS_NAME = "imageElements";
 var IMAGE_LIST_ID_NAME = "imageInfoListView";
 
 // MARK: - Global Variables
+// variables prefixed with "image" to avoid namespace collisions
 
 // Image upload completion flag
 var imageUploadCompleteFlag = false;
 
 // Array to hold Javascript image objects
-var imgArray = new Array();
+var imageArray = new Array();
 
 // MARK: - Functions
 // Functions prefixed with "image" to avoid namespace collisions
@@ -25,7 +26,7 @@ var imgArray = new Array();
 // ----------------------------------------------------------------
 
 function imageUploadComplete() {
-    if (!imageUploadCompleteFlag && imgArray.length > 0) {
+    if (!imageUploadCompleteFlag && imageArray.length > 0) {
         imageUploadCompleteFlag = true;
     }
     if (imageUploadCompleteFlag && mapLoadCompleteFlag) {
@@ -68,11 +69,11 @@ function imageViewUnload() {
 // @return - a function to assign to the FileReader's onload
 // ----------------------------------------------------------------
 
-function createImageListItemWithFile(file, i) {
+function createImageListItemWithFile(file) {
     return function(fileLoadedEvent) {
         var imageLoadedObject = new Image();
         imageLoadedObject.src = fileLoadedEvent.target.result;
-        imgArray.push(imageLoadedObject);
+        imageArray.push(imageLoadedObject);
 
         var imageListItem = document.createElement("div");
         imageListItem.className = "imageInfoListItem";
@@ -84,12 +85,12 @@ function createImageListItemWithFile(file, i) {
 
         var imageListDescription = document.createElement("div");
         imageListDescription.className = "imageInfoListDescription";
-        var descTxt = "<br><strong>" + (i+1) + ". file</strong><br>";
+        var descTxt = "<strong>Image</strong><br>";
         if ('name' in file) {
-            descTxt += "name: " + file.name + "<br>";
+            descTxt = "<strong>" + file.name + "</strong><br>";
         }
         if ('size' in file) {
-            descTxt += "size: " + file.size + " bytes <br>";
+            descTxt += "size: " + file.size + " bytes";
         }
         imageListDescription.innerHTML = descTxt;
         imageListItem.appendChild(imageListDescription);
@@ -116,8 +117,8 @@ function createImageListItemWithFile(file, i) {
 function imageDeleteEntry(imageItem, imageObject) {
     return function() {
         imageItem.parentNode.removeChild(imageItem);
-        var imageObjectIndex = imgArray.findIndex(function(otherObject) { return imageObject == otherObject; });
-        imgArray.splice(imageObjectIndex, 1);
+        var imageObjectIndex = imageArray.findIndex(function(otherObject) { return imageObject == otherObject; });
+        imageArray.splice(imageObjectIndex, 1);
     }
 }
 
@@ -140,7 +141,7 @@ function imageUpload() {
                 var file = x.files[i];
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
-                    fileReader.onload = createImageListItemWithFile(file, i);
+                    fileReader.onload = createImageListItemWithFile(file);
                     fileReader.readAsDataURL(file);
                 }
                 
@@ -154,5 +155,9 @@ function imageUpload() {
             txt  += "<br>The path of the selected file: " + x.value; // If the browser does not support the files property, it will return the path of the selected file instead. 
         }
     }
-    document.getElementById("imageUploadInfo").innerHTML = txt;
+    if (txt != "") {
+        var responseElement = document.getElementById("imageUploadInfo");
+        responseElement.display = "block";
+        responseElement.innerHTML = txt;
+    }
 }

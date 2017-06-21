@@ -173,7 +173,7 @@ function mapInit() {
     // I'm pretty sure this safeguard isn't necessary once I'm pulling the images from the user,
     // but it doesn't hurt to make sure
     if (!DEBUG) {
-        mapImgElements = imgArray;
+        mapImgElements = imageArray;
     }
     map = null;
     mapCenter = {lat: 0.0, lng: 0.0};
