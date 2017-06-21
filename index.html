@@ -17,7 +17,7 @@
         #imageUploadInfo {
             display: none;
         }
-        #imageContentView, #mapContentView {
+        #imageContentView, #mapContentView, #infoContentView {
             width: 90%;
             margin: auto;
             padding: 8px 16px;
@@ -27,28 +27,28 @@
             border-radius: 8px;
             background-color: #CCCCCC;
         }
-        #imageInfoListView {
+        #imageUploadInfoListView, #siteInfoListView {
             margin: 8px 0;
             border-radius: 8px;
             background-color: white;
         }
-        .imageInfoListItem {
+        .imageUploadInfoListItem, .siteInfoListItem {
             margin: 0;
             padding: 8px;
             border: solid;
             border-width: 1px 0 0 0;
             border-color: #CCCCCC;
         }
-        .imageInfoListImage {
+        .imageUploadInfoListImage, .siteInfoListImage {
             width: 128px;
             height: 128px;
             display: inline-block;
             margin-right: 8px;
         }
-        .imageInfoListDescription {
+        .imageUploadInfoListDescription, .siteInfoListDescription {
             display: inline-block;
         }
-        .imageInfoListDeleteButton {
+        .imageUploadInfoListDeleteButton {
             width: 32px;
             height: 32px;
             float: right;
@@ -87,20 +87,26 @@
         <div id="imageContentView">
             <input type="file" id="imageUploadInput" accept="image/*" multiple size="50" onchange="imageUpload()">
             <button id="imageUploadCompleteButton" onclick="imageUploadComplete()">Finished</button>
-            <div id="imageInfoListView">
+            <div id="imageUploadInfoListView">
                 <p id="imageUploadInfo"></p>
-                <div id="imageInfoListItemFrame"></div>
+                <div id="imageUploadInfoListItemFrame"></div>
             </div>
         </div>
     </div>
     <div class="mapElements">
         <div id="mapContentView">
-            <button id="mapButton" onclick="mapViewUnload(); imageViewLoad();">Back</button>
+            <button id="mapBackButton" onclick="mapViewUnload(); imageViewLoad();">Back</button>
             <div id="map"></div>
         </div>
     </div>
     <div class="infoElements" id="info">
-            <button onclick="mapReset()">Back</button>
+        <div id="infoContentView">
+            <button id="infoBackButton" onclick="mapReset()">Back</button>
+            <div id="siteInfoListView">
+                <div id="siteInfoListItemFrame">
+                </div>
+            </div>
+        </div>
     </div>
     <img class="testImage" src="img/IMG_0250.jpg" height="100px" width="100px">
 	<img class="testImage" src="img/IMG_0251.jpg" height="100px" width="100px">

@@ -3,7 +3,7 @@
 // Image view element class name
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 
-var IMAGE_LIST_ID = "imageInfoListItemFrame";
+var IMAGE_LIST_ID = "imageUploadInfoListItemFrame";
 var IMAGE_CONTENT_VIEW_ID = "imageContentView";
 
 // MARK: - Global Variables
@@ -82,15 +82,15 @@ function imageCreateListItem(file) {
             imageArray.push(imageLoadedObject);
 
             var imageListItem = document.createElement("div");
-            imageListItem.className = "imageInfoListItem";
+            imageListItem.className = "imageUploadInfoListItem";
             
             var imageListImg = document.createElement("img");
             imageListImg.src = fileLoadedEvent.target.result;
-            imageListImg.className = "imageInfoListImage";
+            imageListImg.className = "imageUploadInfoListImage";
             imageListItem.appendChild(imageListImg);
 
             var imageListDescription = document.createElement("div");
-            imageListDescription.className = "imageInfoListDescription";
+            imageListDescription.className = "imageUploadInfoListDescription";
             var descTxt = "<strong>Image</strong><br>";
             if ('name' in file) {
                 descTxt = "<strong>" + file.name + "</strong><br>";
@@ -105,7 +105,7 @@ function imageCreateListItem(file) {
             var imageListDelete = document.createElement("img");
             imageListDelete.src = "img/ImageDeleteIcon.png";
             imageListDelete.onclick = imageDeleteListItem(imageListItem, imageLoadedObject, file);
-            imageListDelete.className = "imageInfoListDeleteButton";
+            imageListDelete.className = "imageUploadInfoListDeleteButton";
             imageListItem.appendChild(imageListDelete);
 
             document.getElementById(IMAGE_LIST_ID).appendChild(imageListItem);

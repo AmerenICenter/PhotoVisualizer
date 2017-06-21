@@ -14,6 +14,8 @@ var MAP_CONTAINER_DIV_ID = "mapContentView";
 var MAP_DIV_ID = "map";
 var MAP_BUTTON_ID = "mapButton";
 
+var SITE_LIST_ID = "siteInfoListItemFrame";
+
 // Google API keys (actually, probably not needed)
 var GOOGLE_MAPS_EMBED_API_KEY = "AIzaSyCkqZcICe7cCgvAI7bO7pFzNBOvBsvL1hU";
 var GOOGLE_MAPS_JAVASCRIPT_API_KEY = "AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU";
@@ -93,8 +95,10 @@ function mapReset() {
     if (y.style.display === 'block') {
         y.style.display = 'none';
     }
-    while (y.childElementCount !== 1) {
-        y.removeChild(y.lastChild);
+
+    var siteListFrame = document.getElementById(SITE_LIST_ID);
+    while (siteListFrame.childElementCount !== 0) {
+        siteListFrame.removeChild(siteListFrame.lastChild);
     }
     mapViewLoad();
 }
@@ -112,9 +116,23 @@ function mapCreateInfoPage(clustObjInd) {
 
     for(var j = 0; j < clustObjArray[clustObjInd].arr.length; j++) {
         var tempImg = clustObjArray[clustObjInd].arr[j].img;
-        var elem = document.createElement("img");
-        elem.src =  tempImg.src;
-        document.getElementById("info").appendChild(elem); 
+
+        var siteListItem = document.createElement("div");
+        siteListItem.className = "siteInfoListItem";
+        
+        var siteListImg = document.createElement("img");
+        siteListImg.src = tempImg.img;
+        siteListImg.className = "siteInfoListImage";
+        siteListItem.appendChild(siteListImg);
+
+        var siteListDescription = document.createElement("div");
+        siteListDescription.className = "siteInfoListDescription";
+        var descTxt = "<strong>Latitude:</strong> " + tempImg.lat + 
+            "<br><strong>Longitude:</strong> " + tempImg.lng;
+        siteListDescription.innerHTML = descTxt;
+        siteListItem.appendChild(siteListDescription);
+
+        document.getElementById(SITE_LIST_ID).appendChild(siteListItem);
     }
 }
 
