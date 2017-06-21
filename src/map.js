@@ -267,8 +267,6 @@ function mapPopulate() {
             contentString += "<img width='80' src =" + img.src + ">"; // NEW      
         }
         contentString += "<button type='button' onclick='mapCreateInfoPage(" + i +  ")'>Click Me</button>"; 
-        console.log("length of cluster" + i);
-        console.log(clustObjArray[i].arr.length);
 
         var avgLocation = {lat: clustObjArray[i].avgLat, lng: clustObjArray[i].avgLng};
         marker = new google.maps.Marker({
@@ -284,8 +282,6 @@ function mapPopulate() {
         });
         mapMarkers.push(marker);      
     }
-    console.log("length of clust object array");
-    console.log(clustObjArray.length);
 }
 
 // ----------------------------------------------------------------
@@ -313,8 +309,9 @@ function mapResizeDiv() {
     var mapContainerDiv = document.getElementById(MAP_CONTAINER_DIV_ID);
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
-    mapContainerDiv.style.height = (window.innerHeight - 17) + "px";
+    mapContainerDiv.style.height = (window.innerHeight - 34) + "px";
     mapDiv.style.height = (mapContainerDiv.style.height - mapBackButton.offsetHeight - 24) + "px";
+    console.log(mapContainerDiv.style.height - mapBackButton.offsetHeight - 24);
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }
