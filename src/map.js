@@ -115,7 +115,8 @@ function mapCreateInfoPage(clustObjInd) {
     y.style.display = 'block';
 
     for(var j = 0; j < clustObjArray[clustObjInd].arr.length; j++) {
-        var tempImg = clustObjArray[clustObjInd].arr[j].img;
+        var tempClustObj = clustObjArray[clustObjInd].arr[j];
+        var tempImg = tempClustObj.img;
 
         var siteListItem = document.createElement("div");
         siteListItem.className = "siteInfoListItem";
@@ -127,9 +128,9 @@ function mapCreateInfoPage(clustObjInd) {
 
         var siteListDescription = document.createElement("div");
         siteListDescription.className = "siteInfoListDescription";
-        console.log(tempImg.lat + ", " + tempImg.lng);
-        var descTxt = "<strong>Latitude:</strong> " + tempImg.lat + 
-            "<br><strong>Longitude:</strong> " + tempImg.lng;
+        console.log(tempClustObj.lat + ", " + tempClustObj.lng);
+        var descTxt = "<strong>Latitude:</strong> " + tempClustObj.lat + 
+            "<br><strong>Longitude:</strong> " + tempClustObj.lng;
         siteListDescription.innerHTML = descTxt;
         siteListItem.appendChild(siteListDescription);
 
