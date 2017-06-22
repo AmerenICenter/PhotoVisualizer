@@ -95,11 +95,11 @@ function imageCreateListItem(fileName, filesize) {
             imageListDescription.className = "imageUploadInfoListDescription";
             var descTxt = "<strong>Image</strong><br>";
             if (fileName != null) {
-                descTxt = "<strong>" + file.name + "</strong><br>";
+                descTxt = "<strong>" + fileName + "</strong><br>";
                 imageFilenameArray.push(file.name);
             } 
             if (fileSize != null) {
-                descTxt += "size: " + file.size + " bytes";
+                descTxt += "size: " + fileSize + " bytes";
             }
             imageListDescription.innerHTML = descTxt;
             imageListItem.appendChild(imageListDescription);
