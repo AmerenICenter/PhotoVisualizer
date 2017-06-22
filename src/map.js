@@ -119,8 +119,20 @@ function mapReset() {
 function mapGetClosestTown(location) {
     mapGeocoder.geocode({'location': location}, function(results, status) {
         if (status === 'OK') {
-            console.log(results[0].address_components);
+            for (var resultIndex = 0; resultIndex < results.length; resultIndex++) {
+                var result = results[resultIndex];
+                for (var addressComponentIndex = 0; addressComponentIndex < result.address_components.length; addressComponentIndex++) {
+                    var addressComponent = result.address_components[addressComponentIndex];
+                    if (addressComponent.types.includes("locality")) {
+                        var siteDescriptionElement = document.getElementById(SITE_DESCRIPTION_ID);
+                        siteDescriptionElement.innerHTML = "Location: " + addressComponent.long_name;
+                        return
+                    }
+                } 
+            }
         }
+        var siteDescriptionElement = document.getElementById(SITE_DESCRIPTION_ID);
+        siteDescriptionElement.innerHTML = "Location Unknown";
     });
 }
 
