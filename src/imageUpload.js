@@ -2,6 +2,7 @@
 
 // Image view element class name
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
+var IMAGE_UPLOAD_INPUT_ID = "imageUploadInput";
 
 var IMAGE_LIST_ID = "imageUploadInfoListItemFrame";
 var IMAGE_CONTENT_VIEW_ID = "imageContentView";
@@ -133,6 +134,10 @@ function imageDeleteListItem(imageItem, imageObject, imageFile) {
             var imageFilenameIndex = imageFilenameArray.findIndex(function(otherFilename) { return imageFile.name == otherFilename; });
             imageFilenameArray.splice(imageFilenameIndex, 1);
         }
+
+        // Creates new file upload input so user can reupload same image set
+        var imageUploadElement = document.getElementById(IMAGE_UPLOAD_INPUT_ID);
+        imageUploadElement.parentNode.replaceNode(imageUploadElement.cloneNode(), imageUploadElement);
     }
 }
 
@@ -144,7 +149,7 @@ function imageDeleteListItem(imageItem, imageObject, imageFile) {
 
 function imageUpload() {
     console.log("imageUpload input state changed.");
-    var x = document.getElementById("imageUploadInput");
+    var x = document.getElementById(IMAGE_UPLOAD_INPUT_ID);
     var txt = "";
     var longDecimal = 0;
     var latDecimal = 0;
