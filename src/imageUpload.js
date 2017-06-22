@@ -106,7 +106,7 @@ function imageCreateListItem(fileName, fileSize) {
 
             var imageListDelete = document.createElement("img");
             imageListDelete.src = "img/ImageDeleteIcon.png";
-            imageListDelete.onclick = imageDeleteListItem(imageListItem, imageLoadedObject, file);
+            imageListDelete.onclick = imageDeleteListItem(imageListItem, imageLoadedObject, fileName);
             imageListDelete.className = "imageUploadInfoListDeleteButton";
             imageListItem.appendChild(imageListDelete);
 
@@ -121,18 +121,17 @@ function imageCreateListItem(fileName, fileSize) {
 //                    button is pressed
 // @param imageObject - Javascript image object to delete from
 //                      array (again, when the button is pressed)
-// @param imageFile - File object containing image filename
-//                    to delete from other array
+// @param imageFilename - Filename to delete from other array
 // @return - function to assign to delete icon's onclick
 // ----------------------------------------------------------------
 
-function imageDeleteListItem(imageItem, imageObject, imageFile) {
+function imageDeleteListItem(imageItem, imageObject, imageFilename) {
     return function() {
         imageItem.parentNode.removeChild(imageItem);
         var imageObjectIndex = imageArray.findIndex(function(otherObject) { return imageObject == otherObject; });
         imageArray.splice(imageObjectIndex, 1);
-        if ('name' in imageFile) {
-            var imageFilenameIndex = imageFilenameArray.findIndex(function(otherFilename) { return imageFile.name == otherFilename; });
+        if (imageFilename != null) {
+            var imageFilenameIndex = imageFilenameArray.findIndex(function(otherFilename) { return imageFilename == otherFilename; });
             imageFilenameArray.splice(imageFilenameIndex, 1);
         }
 
