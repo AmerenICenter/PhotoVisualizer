@@ -96,7 +96,7 @@ function imageCreateListItem(fileName, filesize) {
             var descTxt = "<strong>Image</strong><br>";
             if (fileName != null) {
                 descTxt = "<strong>" + fileName + "</strong><br>";
-                imageFilenameArray.push(file.name);
+                imageFilenameArray.push(fileName);
             } 
             if (fileSize != null) {
                 descTxt += "size: " + fileSize + " bytes";
