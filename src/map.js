@@ -127,6 +127,7 @@ function mapCreateInfoPage(clustObjInd) {
 
         var siteListDescription = document.createElement("div");
         siteListDescription.className = "siteInfoListDescription";
+        console.log(tempImg.lat + ", " + tempImg.lng);
         var descTxt = "<strong>Latitude:</strong> " + tempImg.lat + 
             "<br><strong>Longitude:</strong> " + tempImg.lng;
         siteListDescription.innerHTML = descTxt;
