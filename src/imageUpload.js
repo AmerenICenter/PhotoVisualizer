@@ -76,7 +76,7 @@ function imageViewUnload() {
 // @return - a function to assign to the FileReader's onload
 // ----------------------------------------------------------------
 
-function imageCreateListItem(fileName, filesize) {
+function imageCreateListItem(fileName, fileSize) {
     return function(fileLoadedEvent) {
         if (fileName == null || !imageFilenameArray.includes(fileName)) {
             var imageLoadedObject = new Image();
