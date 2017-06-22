@@ -125,14 +125,14 @@ function mapGetClosestTown(location) {
                     var addressComponent = result.address_components[addressComponentIndex];
                     if (addressComponent.types.includes("locality")) {
                         var siteDescriptionElement = document.getElementById(SITE_DESCRIPTION_ID);
-                        siteDescriptionElement.innerHTML = "Location: " + addressComponent.long_name;
+                        siteDescriptionElement.innerHTML = "<strong>Location:</strong> " + addressComponent.long_name;
                         return
                     }
                 } 
             }
         }
         var siteDescriptionElement = document.getElementById(SITE_DESCRIPTION_ID);
-        siteDescriptionElement.innerHTML = "Location Unknown";
+        siteDescriptionElement.innerHTML = "<strong>Location Unknown</strong>";
     });
 }
 
