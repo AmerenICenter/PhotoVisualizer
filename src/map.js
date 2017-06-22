@@ -14,6 +14,7 @@ var MAP_CONTAINER_DIV_ID = "mapContentView";
 var MAP_DIV_ID = "map";
 var MAP_BUTTON_ID = "mapBackButton";
 
+var SITE_DESCRIPTION_ID = "siteDetailDescription";
 var SITE_LIST_ID = "siteInfoListItemFrame";
 
 // Google API keys (actually, probably not needed)
@@ -33,6 +34,9 @@ var mapImageProcessCounter;
 
 // Google map object
 var map;
+
+// Google geocoder object
+var mapGeocoder;
 
 // Center {lat, lng} object
 var mapCenter;
@@ -104,6 +108,23 @@ function mapReset() {
 }
 
 // ----------------------------------------------------------------
+// mapGetClosestTown - uses Google Maps Javascript API's reverse
+//                     geolocation service to determine the name
+//                     of the county in which the photos were taken
+// @param location - {lat, lng} dictionary containing location
+//                   to geolocate
+// @return - string name of county
+// ----------------------------------------------------------------
+
+function mapGetClosestTown(location) {
+    mapGeocoder.geocode({'location': location}, function(results, status) {
+        if (status === 'OK') {
+            console.log(results);
+        }
+    });
+}
+
+// ----------------------------------------------------------------
 // mapCreateInfoPage - Creates a new page using information from
 //                     the passed in ClusterObjIndex 
 // @param clustObjInd - var to grab correct cluster object
@@ -114,9 +135,12 @@ function mapCreateInfoPage(clustObjInd) {
     var y = document.getElementById('info');
     y.style.display = 'block';
 
-    for(var j = 0; j < clustObjArray[clustObjInd].arr.length; j++) {
-        var tempClustObj = clustObjArray[clustObjInd].arr[j];
-        var tempImg = tempClustObj.img;
+    var tempClustObj = clustObjArray[clustObjInd];
+    var closestTown = mapGetClosestTown({lat: tempClustObj.avgLat, lng: tempClustObj.avgLng});
+    
+    for(var j = 0; j < tempClustObj.length; j++) {
+        var tempSiteObj = tempClustObj.arr[j];
+        var tempImg = tempSiteObj.img;
 
         var siteListItem = document.createElement("div");
         siteListItem.className = "siteInfoListItem";
@@ -128,9 +152,8 @@ function mapCreateInfoPage(clustObjInd) {
 
         var siteListDescription = document.createElement("div");
         siteListDescription.className = "siteInfoListDescription";
-        console.log(tempClustObj.lat + ", " + tempClustObj.lng);
-        var descTxt = "<strong>Latitude:</strong> " + tempClustObj.lat + 
-            "<br><strong>Longitude:</strong> " + tempClustObj.lng;
+        var descTxt = "<strong>Latitude:</strong> " + tempSiteObj.lat + 
+            "<br><strong>Longitude:</strong> " + tempSiteObj.lng;
         siteListDescription.innerHTML = descTxt;
         siteListItem.appendChild(siteListDescription);
 
@@ -186,8 +209,8 @@ function mapViewUnload() {
 }
 
 // ----------------------------------------------------------------
-// mapInit - triggers image metadata loads, which then call
-//            map load function
+// mapInit - initializes geocoder and triggers image metadata 
+//           loads, which then call map load function
 // ----------------------------------------------------------------
 
 function mapInit() {
@@ -199,6 +222,7 @@ function mapInit() {
         mapImgElements = imageArray;
     }
     map = null;
+    mapGeocoder = new google.maps.Geocoder;
     mapCenter = {lat: 0.0, lng: 0.0};
     mapMarkers = [];
     mapMarkerLocations = [];
