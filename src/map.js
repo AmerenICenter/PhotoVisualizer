@@ -138,6 +138,7 @@ function mapCreateInfoPage(clustObjInd) {
     var tempClustObj = clustObjArray[clustObjInd];
     var closestTown = mapGetClosestTown({lat: tempClustObj.avgLat, lng: tempClustObj.avgLng});
     
+    console.log("h!");
     for(var j = 0; j < tempClustObj.length; j++) {
         var tempSiteObj = tempClustObj.arr[j];
         var tempImg = tempSiteObj.img;
