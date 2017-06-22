@@ -119,7 +119,7 @@ function mapReset() {
 function mapGetClosestTown(location) {
     mapGeocoder.geocode({'location': location}, function(results, status) {
         if (status === 'OK') {
-            console.log(results);
+            console.log(results[0].address_components);
         }
     });
 }
@@ -138,7 +138,6 @@ function mapCreateInfoPage(clustObjInd) {
     var tempClustObj = clustObjArray[clustObjInd];
     var closestTown = mapGetClosestTown({lat: tempClustObj.avgLat, lng: tempClustObj.avgLng});
     
-    console.log("h!");
     for(var j = 0; j < tempClustObj.arr.length; j++) {
         var tempSiteObj = tempClustObj.arr[j];
         var tempImg = tempSiteObj.img;
@@ -356,7 +355,6 @@ function mapResizeDiv() {
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
     mapContainerDiv.style.height = (window.innerHeight - 34) + "px";
     mapDiv.style.height = (window.innerHeight - mapBackButton.offsetHeight - 58) + "px";
-    console.log(window.innerHeight - mapBackButton.offsetHeight - 58);
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }
