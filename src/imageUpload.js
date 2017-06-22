@@ -71,13 +71,14 @@ function imageViewUnload() {
 // imageCreateListItem - returns file load callback function that
 //                       creates list entry including both photo
 //                       and file info
-// @param file - the file associated with this list entry
+// @param fileName - the filename associated with this list entry
+// @param fileSize - the size of said file
 // @return - a function to assign to the FileReader's onload
 // ----------------------------------------------------------------
 
-function imageCreateListItem(file) {
+function imageCreateListItem(fileName, filesize) {
     return function(fileLoadedEvent) {
-        if (!('name' in file) || !imageFilenameArray.includes(file.name)) {
+        if (fileName == null || !imageFilenameArray.includes(fileName)) {
             var imageLoadedObject = new Image();
             imageLoadedObject.src = fileLoadedEvent.target.result;
             imageArray.push(imageLoadedObject);
@@ -93,11 +94,11 @@ function imageCreateListItem(file) {
             var imageListDescription = document.createElement("div");
             imageListDescription.className = "imageUploadInfoListDescription";
             var descTxt = "<strong>Image</strong><br>";
-            if ('name' in file) {
+            if (fileName != null) {
                 descTxt = "<strong>" + file.name + "</strong><br>";
                 imageFilenameArray.push(file.name);
-            }
-            if ('size' in file) {
+            } 
+            if (fileSize != null) {
                 descTxt += "size: " + file.size + " bytes";
             }
             imageListDescription.innerHTML = descTxt;
@@ -161,7 +162,15 @@ function imageUpload() {
                 var file = x.files[i];
                 if (file.type.match("image.*")) {
                     var fileReader = new FileReader();
-                    fileReader.onload = imageCreateListItem(file);
+                    var fileName = null;
+                    if ('name' in file) {
+                        fileName = file.name;
+                    }
+                    var fileSize = null;
+                    if ('size' in file) {
+                        fileSize = file.size;
+                    }
+                    fileReader.onload = imageCreateListItem(fileName, fileSize);
                     fileReader.readAsDataURL(file);
                 }
                 
