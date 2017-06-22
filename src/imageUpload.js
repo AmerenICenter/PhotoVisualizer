@@ -137,7 +137,7 @@ function imageDeleteListItem(imageItem, imageObject, imageFile) {
 
         // Creates new file upload input so user can reupload same image set
         var imageUploadElement = document.getElementById(IMAGE_UPLOAD_INPUT_ID);
-        imageUploadElement.parentNode.replaceNode(imageUploadElement.cloneNode(), imageUploadElement);
+        imageUploadElement.parentNode.replaceChild(imageUploadElement.cloneNode(), imageUploadElement);
     }
 }
 
