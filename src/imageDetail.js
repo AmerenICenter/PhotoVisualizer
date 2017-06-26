@@ -1,8 +1,8 @@
 // MARK: - Constants
 var DETAIL_VIEW_CLASS_NAME = "detailElements";
-var DETAIL_VIEW_ID = "imageDetailView";
-var DETAIL_VIEW_IMAGE_ID = "imageDetailViewImage";
-var DETAIL_BUTTON_ID = "imageDetailViewButton";
+var DETAIL_VIEW_ID = "detailContentView";
+var DETAIL_VIEW_IMAGE_ID = "detailViewImage";
+var DETAIL_BUTTON_ID = "detailExitButton";
 
 // MARK: - Functions
 // All functions prefixed with "detail" to prevent namespace collisions
