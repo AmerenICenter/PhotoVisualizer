@@ -160,6 +160,7 @@ function mapCreateInfoPage(clustObjInd) {
         var siteListImg = document.createElement("img");
         siteListImg.src = tempImg.src;
         siteListImg.className = "siteInfoListImage";
+        siteListImg.onclick = function() {detailViewLoad(tempImg);};
         siteListItem.appendChild(siteListImg);
 
         var siteListDescription = document.createElement("div");

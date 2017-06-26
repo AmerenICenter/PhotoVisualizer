@@ -18,7 +18,7 @@
         #imageUploadInfo {
             display: none;
         }
-        #imageContentView, #mapContentView, #infoContentView {
+        #imageContentView, #mapContentView, #infoContentView, #detailContentView{
             width: 90%;
             margin: auto;
             padding: 8px 16px;
@@ -77,7 +77,7 @@
             padding: 8px;
         }
 
-        .mapElements, .imageUpload, .testImage, #info {
+        .mapElements, .imageUpload, .testImage, .infoElements, .detailElements {
             display: none;
         }
 	</style>
@@ -115,6 +115,11 @@
                 <div id="siteInfoListItemFrame">
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="detailElements">
+        <div id="detailContentView">
+            <button id="detailExitButton" onclick="detailViewUnload()">Back</button>
         </div>
     </div>
     <img class="testImage" src="img/IMG_0250.jpg" height="100px" width="100px">
