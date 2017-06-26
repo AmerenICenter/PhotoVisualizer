@@ -18,7 +18,7 @@
         #imageUploadInfo {
             display: none;
         }
-        #imageContentView, #mapContentView, #infoContentView, #detailContentView{
+        #imageDetailView, #mapContentView, #infoContentView, #detailContentView{
             width: 90%;
             margin: auto;
             padding: 8px 16px;
@@ -89,7 +89,7 @@
 </head>
 <body onload="imageViewLoad(); imageUpload();">
     <div class="imageElements">
-        <div id="imageContentView">
+        <div id="imageDetailView">
             <input type="file" id="imageUploadInput" accept="image/*" multiple size="50" onchange="imageUpload()">
             <button id="imageUploadCompleteButton" onclick="imageUploadComplete()">Finished</button>
             <div id="imageUploadInfoListView">
