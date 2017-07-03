@@ -55,7 +55,9 @@ function detailResizeDiv() {
     var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
     detailViewDiv.style.height = (window.innerHeight - 34);
     var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 74);
+    console.log(imageHeight)
     var imageWidth = (window.innerWidth * 0.9 - 34);
+    console.log(imageWidth)
     if (imageHeight * detailAspectRatio > imageWidth) {
         console.log("height resized");
         detailViewImage.style.height = imageHeight + "px";
