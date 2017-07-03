@@ -52,13 +52,13 @@ function detailResizeDiv() {
     var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
     var aspectRatio = detailViewImage.style.width / detailViewImage.style.height;
     detailViewDiv.style.height = (window.innerHeight - 34) + "px";
-    var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 58) + "px";
+    var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 58);
     var imageWidth = (window.innerWidth * 0.9 - 34);
-    if (imageHeight * aspectRatio >= imageWidth) {
+    if (imageHeight * aspectRatio < imageWidth) {
         console.log("height resized");
-        detailViewImage.style.height = imageHeight;
+        detailViewImage.style.height = imageHeight + "px";
     } else {
         console.log("width resized");
-        detailViewImage.style.width = imageWidth;
+        detailViewImage.style.width = imageWidth + "px";
     }
 }
