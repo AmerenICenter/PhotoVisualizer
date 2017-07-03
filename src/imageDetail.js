@@ -48,10 +48,11 @@ function detailViewUnload() {
 
 function detailResizeDiv() {
     var detailViewDiv = document.getElementById(DETAIL_VIEW_ID);
-    var detailViewImage = document.getElementById(DETAIL_VIEW_IMAGE_ID);
-    var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
-    var aspectRatio = detailViewImage.style.width / detailViewImage.style.height;
+    // var detailViewImage = document.getElementById(DETAIL_VIEW_IMAGE_ID);
+    // var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
+    // var aspectRatio = detailViewImage.style.width / detailViewImage.style.height;
     detailViewDiv.style.height = (window.innerHeight - 34);
+    /*
     var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 58);
     var imageWidth = (window.innerWidth * 0.9 - 34);
     if (imageHeight * aspectRatio < imageWidth) {
@@ -63,4 +64,5 @@ function detailResizeDiv() {
         detailViewImage.style.width = imageWidth + "px";
         detailViewImage.style.height = (imageWidth / aspectRatio) + "px";
     }
+    */
 }
