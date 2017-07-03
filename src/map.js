@@ -96,10 +96,7 @@ var clustFlag; // NEWER
 // ----------------------------------------------------------------
 
 function mapReset() {
-    var y = document.getElementById('info'); 
-    if (y.style.display === 'block') {
-        y.style.display = 'none';
-    }
+    mapInfoViewUnload();
 
     var siteListFrame = document.getElementById(SITE_LIST_ID);
     while (siteListFrame.childElementCount !== 0) {
