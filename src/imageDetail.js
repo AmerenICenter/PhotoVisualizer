@@ -65,4 +65,5 @@ function detailResizeDiv() {
         detailViewImage.style.height = (imageWidth / aspectRatio) + "px";
     }
     */
+    console.log("ughhh");
 }
