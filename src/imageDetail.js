@@ -58,7 +58,7 @@ function detailResizeDiv() {
     console.log(imageHeight)
     var imageWidth = (window.innerWidth * 0.9 - 34);
     console.log(imageWidth)
-    if (imageHeight * detailAspectRatio < imageWidth) {
+    if (imageHeight * detailAspectRatio < imageWidth || 1 == 1) {
         console.log("height resized");
         detailViewImage.style.height = imageHeight + "px";
         detailViewImage.style.height = (imageHeight * detailAspectRatio) + "px";
