@@ -21,7 +21,7 @@ function detailViewLoad(image) {
 
     var detailViewImage = document.createElement("img");
     detailViewImage.src = image.src;
-    detailViewImage.id = DETAIL_VIEW_CLASS_NAME;
+    detailViewImage.id = DETAIL_VIEW_IMAGE_ID;
     document.getElementById(DETAIL_VIEW_ID).appendChild(detailViewImage);
 
     detailResizeDiv();
