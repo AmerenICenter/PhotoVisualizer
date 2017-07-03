@@ -53,18 +53,7 @@ function detailResizeDiv() {
     var detailViewDiv = document.getElementById(DETAIL_VIEW_ID);
     var detailViewImage = document.getElementById(DETAIL_VIEW_IMAGE_ID);
     var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
-    detailViewDiv.style.height = (window.innerHeight - 34);
-    var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 74);
-    console.log(imageHeight)
     var imageWidth = (window.innerWidth * 0.9 - 34);
-    console.log(imageWidth)
-    if (imageHeight * detailAspectRatio < imageWidth || 1 == 1) {
-        console.log("height resized");
-        detailViewImage.style.height = imageHeight + "px";
-        detailViewImage.style.height = (imageHeight * detailAspectRatio) + "px";
-    } else {
-        console.log("width resized");
-        detailViewImage.style.width = imageWidth + "px";
-        detailViewImage.style.height = (imageWidth / detailAspectRatio) + "px";
-    }
+    detailViewImage.style.width = imageWidth + "px";
+    detailViewImage.style.height = (imageWidth / detailAspectRatio) + "px";
 }
