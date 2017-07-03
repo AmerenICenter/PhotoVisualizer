@@ -76,6 +76,11 @@
         #siteDetailDescription {
             padding: 8px;
         }
+        
+        #detailViewImage {
+            max-width: 100%;
+            max-height: 100%;
+        }
 
         .mapElements, .imageUpload, .testImage, .infoElements, .detailElements {
             display: none;
@@ -104,7 +109,7 @@
             <div id="map"></div>
         </div>
     </div>
-    <div class="infoElements" id="info">
+    <div class="infoElements">
         <div id="infoContentView">
             <button id="infoBackButton" onclick="mapReset()">Back</button>
             <div id="siteDetailView">
@@ -120,7 +125,7 @@
     </div>
     <div class="detailElements">
         <div id="detailContentView">
-            <button id="detailExitButton" onclick="detailViewUnload()">Back</button>
+            <button id="detailExitButton" onclick="detailViewUnload(); mapInfoViewLoad()">Back</button>
         </div>
     </div>
     <img class="testImage" src="img/IMG_0250.jpg" height="100px" width="100px">

@@ -9,6 +9,7 @@ var TEST_IMAGE_CLASS_NAME = "testImage";
 // Class names for various page contexts
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 var MAP_VIEW_CLASS_NAME = "mapElements";
+var INFO_VIEW_CLASS_NAME = "infoElements";
 
 var MAP_CONTAINER_DIV_ID = "mapContentView";
 var MAP_DIV_ID = "map";
@@ -126,7 +127,7 @@ function mapGetClosestTown(location) {
                     if (addressComponent.types.includes("locality")) {
                         var siteDescriptionElement = document.getElementById(SITE_DESCRIPTION_ID);
                         siteDescriptionElement.innerHTML = "<strong>Location:</strong> " + addressComponent.long_name;
-                        return
+                        return;
                     }
                 } 
             }
@@ -137,6 +138,30 @@ function mapGetClosestTown(location) {
 }
 
 // ----------------------------------------------------------------
+// mapInfoViewLoad - reveals map info div (without adding any 
+//                   elements to div)
+// ----------------------------------------------------------------
+
+function mapInfoViewLoad() {
+    var infoViewElements = document.getElementsByClassName(INFO_VIEW_CLASS_NAME);
+    for (var infoViewIndex = 0; infoViewIndex < infoViewElements.length; infoViewIndex++) {
+       infoViewElements[infoViewIndex].style.display = "block";
+    }
+}   
+
+// ----------------------------------------------------------------
+// mapInfoViewUnload - hides map info div (without removing any 
+//                     elements from div)
+// ----------------------------------------------------------------
+
+function mapInfoViewUnload() {
+    var infoViewElements = document.getElementsByClassName(INFO_VIEW_CLASS_NAME);
+    for (var infoViewIndex = 0; infoViewIndex < infoViewElements.length; infoViewIndex++) {
+       infoViewElements[infoViewIndex].style.display = "none";
+    }
+}
+
+// ----------------------------------------------------------------
 // mapCreateInfoPage - Creates a new page using information from
 //                     the passed in ClusterObjIndex 
 // @param clustObjInd - var to grab correct cluster object
@@ -144,23 +169,22 @@ function mapGetClosestTown(location) {
 
 function mapCreateInfoPage(clustObjInd) {
     mapViewUnload();
-    var y = document.getElementById('info');
-    y.style.display = 'block';
+    mapInfoViewLoad();
 
     var tempClustObj = clustObjArray[clustObjInd];
     var closestTown = mapGetClosestTown({lat: tempClustObj.avgLat, lng: tempClustObj.avgLng});
-    
+
     for(var j = 0; j < tempClustObj.arr.length; j++) {
         var tempSiteObj = tempClustObj.arr[j];
         var tempImg = tempSiteObj.img;
 
         var siteListItem = document.createElement("div");
         siteListItem.className = "siteInfoListItem";
-        
+
         var siteListImg = document.createElement("img");
         siteListImg.src = tempImg.src;
         siteListImg.className = "siteInfoListImage";
-        siteListImg.onclick = function() {detailViewLoad(tempImg);};
+        siteListImg.onclick = function() {mapInfoViewUnload(); detailViewLoad(tempImg);};
         siteListItem.appendChild(siteListImg);
 
         var siteListDescription = document.createElement("div");
@@ -276,22 +300,22 @@ function mapReadImageMetadata(image) {
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1.0);
             mapMarkerLocations.push(photoLocation);
 			mapMarkImage.push(this); // NEW
-            var newImgObj = new imageObj(photoLocation.lat, photoLocation.lng, this); 
+            var newImgObj = new imageObj(photoLocation.lat, photoLocation.lng, this);
             if (clustObjArray.length === 0) { 
-                var newclustObj = new clustObj(newImgObj); 
-                clustObjArray.push(newclustObj) 
+                var newclustObj = new clustObj(newImgObj);
+                clustObjArray.push(newclustObj);
             }
             else { 
                 for(var i = 0; i < clustObjArray.length; i++) { 
                     if ( Math.abs(clustObjArray[i].avgLat - newImgObj.lat) <.1 && Math.abs(clustObjArray[i].avgLng - newImgObj.lng) < .1) { 
-                        clustObjArray[i].add(newImgObj); 
-                        clustFlag = true; 
+                        clustObjArray[i].add(newImgObj);
+                        clustFlag = true;
                         break;
                     }
                 }
                 if (!clustFlag) {
-                    var newclustObj = new clustObj(newImgObj); 
-                    clustObjArray.push(newclustObj) 
+                    var newclustObj = new clustObj(newImgObj);
+                    clustObjArray.push(newclustObj);
                 }
             }
         }
@@ -335,9 +359,9 @@ function mapPopulate() {
         marker.addListener('click', function() {
             infowindow.setContent(this.contentString);
             infowindow.open(map, this);
-            map.setCenter(this.getPosition()); 
+            map.setCenter(this.getPosition());
         });
-        mapMarkers.push(marker);      
+        mapMarkers.push(marker);
     }
 }
 
