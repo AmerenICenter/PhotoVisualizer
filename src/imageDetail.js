@@ -50,12 +50,15 @@ function detailResizeDiv() {
     var detailViewDiv = document.getElementById(DETAIL_VIEW_ID);
     var detailViewImage = document.getElementById(DETAIL_VIEW_IMAGE_ID);
     var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
+    var aspectRatio = detailViewImage.style.width / detailViewImage.style.height;
     detailViewDiv.style.height = (window.innerHeight - 34) + "px";
     var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 58) + "px";
     var imageWidth = (window.innerWidth * 0.9 - 34);
-    if (imageHeight < imageWidth) {
+    if (imageHeight < imageWidth * aspectRatio) {
+        console.log("height resized");
         detailViewImage.style.height = imageHeight;
     } else {
+        console.log("width resized");
         detailViewImage.style.width = imageWidth;
     }
 }
