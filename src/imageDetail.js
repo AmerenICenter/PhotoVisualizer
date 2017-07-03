@@ -4,6 +4,8 @@ var DETAIL_VIEW_ID = "detailContentView";
 var DETAIL_VIEW_IMAGE_ID = "detailViewImage";
 var DETAIL_BUTTON_ID = "detailExitButton";
 
+var detailAspectRatio;
+
 // MARK: - Functions
 // All functions prefixed with "detail" to prevent namespace collisions
 
@@ -23,6 +25,7 @@ function detailViewLoad(image) {
     detailViewImage.src = image.src;
     detailViewImage.id = DETAIL_VIEW_IMAGE_ID;
     document.getElementById(DETAIL_VIEW_ID).appendChild(detailViewImage);
+    detailAspectRatio = detailViewImage.style.width / detailViewImage.style.height;
 
     detailResizeDiv();
     window.onresize = detailResizeDiv;
@@ -48,12 +51,10 @@ function detailViewUnload() {
 
 function detailResizeDiv() {
     var detailViewDiv = document.getElementById(DETAIL_VIEW_ID);
-    // var detailViewImage = document.getElementById(DETAIL_VIEW_IMAGE_ID);
-    // var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
-    // var aspectRatio = detailViewImage.style.width / detailViewImage.style.height;
+    var detailViewImage = document.getElementById(DETAIL_VIEW_IMAGE_ID);
+    var detailExitButton = document.getElementById(DETAIL_BUTTON_ID)
     detailViewDiv.style.height = (window.innerHeight - 34);
-    /*
-    var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 58);
+    var imageHeight = (window.innerHeight - detailExitButton.offsetHeight - 74);
     var imageWidth = (window.innerWidth * 0.9 - 34);
     if (imageHeight * aspectRatio < imageWidth) {
         console.log("height resized");
@@ -64,6 +65,4 @@ function detailResizeDiv() {
         detailViewImage.style.width = imageWidth + "px";
         detailViewImage.style.height = (imageWidth / aspectRatio) + "px";
     }
-    */
-    console.log("ughhh");
 }
