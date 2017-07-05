@@ -18,7 +18,7 @@
         #imageUploadInfo {
             display: none;
         }
-        #imageDetailView, #mapContentView, #infoContentView, #detailContentView, #imageUploadInstructionView {
+        #imageDetailView, #mapContentView, #infoContentView, #detailContentView {
             width: 90%;
             margin: auto;
             padding: 8px 16px;
@@ -28,7 +28,18 @@
             border-radius: 8px;
             background-color: #CCCCCC;
         }
-        #imageUploadInfoListView, #siteInfoListView, #siteDetailView{
+        #imageUploadInstructionView {
+            width: 90%;
+            margin: auto;
+            padding: 8px 16px;
+            border: solid;
+            border-width: 1px;
+            border-color: #555555;
+            border-radius: 8px;
+            background-color: #CCCCCC;
+            text-align: center;
+        }
+        #imageUploadInfoListView, #siteInfoListView, #siteDetailView {
             margin: 8px 0;
             border-radius: 8px;
             background-color: white;
@@ -96,6 +107,7 @@
 </head>
 <body onload="imageViewLoad(); imageUpload();">
     <div id="imageUploadInstructionView">
+        <u>Instructions</u>
         <p>Use the Choose Files button to navigate to the folder which contain the photos you wish to display.</p>
         <p>You can use control to select multiple photos to display.</p>
         <p>When you are finished selecting the photos, use the Finished button to diplay to the map.</p>
