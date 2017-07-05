@@ -391,8 +391,8 @@ function mapResizeDiv() {
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
     var mapInstructionDiv = document.getElementsByClassName(MAP_INSTRUCTION_CLASS_NAME)[0];
-    mapContainerDiv.style.height = (window.innerHeight - mapInstructionDiv.style.height - 42) + "px";
-    mapDiv.style.height = (window.innerHeight - mapInstructionDiv.style.height - mapBackButton.offsetHeight - 66) + "px";
+    mapContainerDiv.style.height = (window.innerHeight - mapInstructionDiv.clientHeight - 42) + "px";
+    mapDiv.style.height = (window.innerHeight - mapInstructionDiv.clientHeight - mapBackButton.offsetHeight - 66) + "px";
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }
