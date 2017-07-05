@@ -28,7 +28,7 @@
             border-radius: 8px;
             background-color: #CCCCCC;
         }
-        #imageUploadInfoListView, #siteInfoListView, #siteDetailView {
+        #imageUploadInfoListView, #siteInfoListView, #siteDetailView, #imageUploadInstructionView {
             margin: 8px 0;
             border-radius: 8px;
             background-color: white;
@@ -99,6 +99,9 @@
         <div id="imageDetailView">
             <input type="file" id="imageUploadInput" accept="image/*" multiple size="50" onchange="imageUpload()">
             <button id="imageUploadCompleteButton" onclick="imageUploadComplete()">Finished</button>
+            <div id="imageUploadInstructionView">
+                <p id="Navigate to the folder which contain the photos you wish to display. You can use control to select multiple photos to display. When you are finished selecting the photos, use the Finished button to control the map."></p>
+            </div>
             <div id="imageUploadInfoListView">
                 <p id="imageUploadInfo"></p>
                 <div id="imageUploadInfoListItemFrame"></div>
