@@ -54,14 +54,15 @@ function imageViewLoad() {
     imageUploadCompleteFlag = false;
     // imageResizeDiv();
     // window.onresize = imageResizeDiv;
+    var mapInstructElements = document.getElementsByClassName("mapInstruction");
+    for (var imageViewIndex = 0; imageViewIndex < mapInstructElements.length; imageViewIndex++) {
+        mapInstructElements[imageViewIndex].style.display = "none";
+    }
     var uploadInstructElements = document.getElementsByClassName("imageUploadInstruction");
     for (var imageViewIndex = 0; imageViewIndex < uploadInstructElements.length; imageViewIndex++) {
       uploadInstructElements[imageViewIndex].style.display = "block";
     }
-    var mapInstructElements = document.getElementsByClassName("mapInstruction");
-    for (var imageViewIndex = 0; imageViewIndex < mapInstructElements.length; imageViewIndex++) {
-      mapInstructElements[imageViewIndex].style.display = "none";
-    }
+
 }
 
 // ----------------------------------------------------------------
