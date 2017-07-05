@@ -28,7 +28,7 @@
             border-radius: 8px;
             background-color: #CCCCCC;
         }
-        #imageUploadInstructionView {
+        #imageUploadInstructionView, #mapUploadInstructionView {
             width: 90%;
             margin: 8px auto;
             padding: 8px 16px;
@@ -106,11 +106,21 @@
     <script type="text/javascript" src="src/imageDetail.js"> </script>
 </head>
 <body onload="imageViewLoad(); imageUpload();">
-    <div id="imageUploadInstructionView">
-        <u>Instructions</u>
-        <p>Use the Choose Files button to navigate to the folder which contain the photos you wish to display.</p>
-        <p>You can use control to select multiple photos to display.</p>
-        <p>When you are finished selecting the photos, use the Finished button to diplay to the map.</p>
+    <div class="imageUploadInstruction">
+        <div id="imageUploadInstructionView">
+            <u>Instructions</u>
+            <p>Use the Choose Files button to navigate to the folder which contain the photos you wish to display.</p>
+            <p>You can use control to select multiple photos to display.</p>
+            <p>When you are finished selecting the photos, use the Finished button to diplay to the map.</p>
+        </div>
+    </div>
+    <div class="mapInstruction">
+        <div id="mapUploadInstructionView">
+            <u>Instructions</u>
+            <p>Use the Choose Files button to navigate to the folder which contain the photos you wish to display.</p>
+            <p>You can use control to select multiple photos to display.</p>
+            <p>When you are finished selecting the photos, use the Finished button to diplay to the map.</p>
+        </div>
     </div>
     <div class="imageElements">
         <div id="imageDetailView">
