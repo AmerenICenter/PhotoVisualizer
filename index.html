@@ -18,7 +18,7 @@
         #imageUploadInfo {
             display: none;
         }
-        #imageDetailView, #mapContentView, #infoContentView, #detailContentView{
+        #imageDetailView, #mapContentView, #infoContentView, #detailContentView, #imageUploadInstructionView {
             width: 90%;
             margin: auto;
             padding: 8px 16px;
@@ -28,7 +28,7 @@
             border-radius: 8px;
             background-color: #CCCCCC;
         }
-        #imageUploadInfoListView, #siteInfoListView, #siteDetailView, #imageUploadInstructionView {
+        #imageUploadInfoListView, #siteInfoListView, #siteDetailView{
             margin: 8px 0;
             border-radius: 8px;
             background-color: white;
@@ -95,15 +95,15 @@
     <script type="text/javascript" src="src/imageDetail.js"> </script>
 </head>
 <body onload="imageViewLoad(); imageUpload();">
+    <div id="imageUploadInstructionView">
+        <p>Use the Choose Files button to navigate to the folder which contain the photos you wish to display.</p>
+        <p>You can use control to select multiple photos to display.</p>
+        <p>When you are finished selecting the photos, use the Finished button to diplay to the map.</p>
+    </div>
     <div class="imageElements">
         <div id="imageDetailView">
             <input type="file" id="imageUploadInput" accept="image/*" multiple size="50" onchange="imageUpload()">
             <button id="imageUploadCompleteButton" onclick="imageUploadComplete()">Finished</button>
-            <div id="imageUploadInstructionView">
-                <p>Use the Choose Files button to navigate to the folder which contain the photos you wish to display.</p>
-                <p>You can use control to select multiple photos to display.</p>
-                <p>When you are finished selecting the photos, use the Finished button to diplay to the map.</p>
-            </div>
             <div id="imageUploadInfoListView">
                 <p id="imageUploadInfo"></p>
                 <div id="imageUploadInfoListItemFrame"></div>
