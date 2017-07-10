@@ -3,7 +3,7 @@ from PIL import Image, ImageDraw
 start = (107, 184, 53)
 end = (36, 147, 60)
 colorRange = [end[i] - start[i] for i in range(3)]
-percent = 0.4
+percent = 0.6
 
 dimension = 100
 
