@@ -41,6 +41,41 @@ function imageUploadComplete() {
     }
 }
 
+
+// ----------------------------------------------------------------
+// imageUploadInstructionLoad - replaces the instructions with 
+//                              instructions to upload images
+// ----------------------------------------------------------------
+
+function imageUploadInstructionLoad() {
+    var mapInstructElements = document.getElementsByClassName("mapInstruction");
+    for (var imageViewIndex = 0; imageViewIndex < mapInstructElements.length; imageViewIndex++) {
+        mapInstructElements[imageViewIndex].style.display = "none";
+    }
+    var uploadInstructElements = document.getElementsByClassName("imageUploadInstruction");
+    for (var imageViewIndex = 0; imageViewIndex < uploadInstructElements.length; imageViewIndex++) {
+      uploadInstructElements[imageViewIndex].style.display = "block";
+    }
+}
+
+// ----------------------------------------------------------------
+// mapInstructionLoad - replaces the instructions with instructions
+//                      for the map
+// ----------------------------------------------------------------
+
+function mapInstructionLoad() {
+    var mapInstructElements = document.getElementsByClassName("mapInstruction");
+    for (var imageViewIndex = 0; imageViewIndex < mapInstructElements.length; imageViewIndex++) {
+        mapInstructElements[imageViewIndex].style.display = "block";
+    }
+    var uploadInstructElements = document.getElementsByClassName("imageUploadInstruction");
+    for (var imageViewIndex = 0; imageViewIndex < uploadInstructElements.length; imageViewIndex++) {
+      uploadInstructElements[imageViewIndex].style.display = "none";
+    }
+}
+
+
+
 // ----------------------------------------------------------------
 // imageViewLoad - reveals elements for image upload and resets 
 //                 image upload status
@@ -52,8 +87,8 @@ function imageViewLoad() {
        imageViewElements[imageViewIndex].style.display = "block";
     }
     imageUploadCompleteFlag = false;
-    // imageResizeDiv();
-    // window.onresize = imageResizeDiv;
+    imageUploadInstructionLoad();
+
 }
 
 // ----------------------------------------------------------------

@@ -10,6 +10,7 @@ var TEST_IMAGE_CLASS_NAME = "testImage";
 var IMAGE_VIEW_CLASS_NAME = "imageElements";
 var MAP_VIEW_CLASS_NAME = "mapElements";
 var INFO_VIEW_CLASS_NAME = "infoElements";
+var MAP_INSTRUCTION_CLASS_NAME = "mapInstruction";
 
 var MAP_CONTAINER_DIV_ID = "mapContentView";
 var MAP_DIV_ID = "map";
@@ -216,6 +217,7 @@ function mapLoadComplete() {
         imageViewUnload();
         mapViewLoad();
         mapInit();
+
     }
 }
 
@@ -228,6 +230,7 @@ function mapViewLoad() {
     for (var mapViewIndex = 0; mapViewIndex < mapViewElements.length; mapViewIndex++) {
        mapViewElements[mapViewIndex].style.display = "block";
     }
+    mapInstructionLoad();
     mapResizeDiv();
     window.onresize = mapResizeDiv;
 }
@@ -387,8 +390,9 @@ function mapResizeDiv() {
     var mapContainerDiv = document.getElementById(MAP_CONTAINER_DIV_ID);
     var mapDiv = document.getElementById(MAP_DIV_ID);
     var mapBackButton = document.getElementById(MAP_BUTTON_ID);
-    mapContainerDiv.style.height = (window.innerHeight - 34) + "px";
-    mapDiv.style.height = (window.innerHeight - mapBackButton.offsetHeight - 58) + "px";
+    var mapInstructionDiv = document.getElementsByClassName(MAP_INSTRUCTION_CLASS_NAME)[0];
+    mapContainerDiv.style.height = (window.innerHeight - mapInstructionDiv.clientHeight - 42) + "px";
+    mapDiv.style.height = (window.innerHeight - mapInstructionDiv.clientHeight - mapBackButton.offsetHeight - 66) + "px";
     if (map != null) {
         google.maps.event.trigger(map, "resize");
     }
