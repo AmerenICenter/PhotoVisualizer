@@ -182,7 +182,8 @@ function mapCreateInfoPage(clustObjInd) {
         var siteListImg = document.createElement("img");
         siteListImg.src = tempImg.src;
         siteListImg.className = "siteInfoListImage";
-        siteListImg.onclick = function() {mapInfoViewUnload(); detailViewLoad(tempImg);};
+        var siteListImgClicker = function(img) {return function() {mapInfoViewUnload(); detailViewLoad(img);}};
+        siteListImg.onclick = siteListImgClicker(testImg);
         siteListItem.appendChild(siteListImg);
 
         var siteListDescription = document.createElement("div");
