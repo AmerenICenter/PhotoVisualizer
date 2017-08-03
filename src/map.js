@@ -122,7 +122,7 @@ function mapGetClosestTown(location) {
                 var result = results[resultIndex];
                 for (var addressComponentIndex = 0; addressComponentIndex < result.address_components.length; addressComponentIndex++) {
                     var addressComponent = result.address_components[addressComponentIndex];
-                    if (addressComponent.types.includes("locality")) {
+                    if (addressComponent.types.search("locality") > -1) {
                         var siteDescriptionElement = document.getElementById(SITE_DESCRIPTION_ID);
                         siteDescriptionElement.innerHTML = "<strong>Location:</strong> " + addressComponent.long_name;
                         return;
