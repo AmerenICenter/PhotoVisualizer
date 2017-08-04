@@ -6,7 +6,7 @@ var IMAGE_UPLOAD_INPUT_ID = "imageUploadInput";
 
 var IMAGE_LIST_ID = "imageUploadInfoListItemFrame";
 var IMAGE_CONTENT_VIEW_ID = "imageContentView";
-/*
+
 // MARK: - Global Variables
 // variables prefixed with "image" to avoid namespace collisions
 
@@ -18,7 +18,9 @@ var imageArray = [];
 
 // Array of filenames, to prevent duplicate importation
 var imageFilenameArray = [];
-*/
+
+var mapLoadCompleteFlag = false;
+
 // MARK: - Functions
 // Functions prefixed with "image" to avoid namespace collisions
 
@@ -183,7 +185,6 @@ function imageDeleteListItem(imageItem, imageObject, imageFilename) {
 // ----------------------------------------------------------------
 
 function imageUpload() {
-    console.log("imageUpload input state changed.");
     var x = document.getElementById(IMAGE_UPLOAD_INPUT_ID);
     var txt = "";
     var longDecimal = 0;
@@ -224,17 +225,3 @@ function imageUpload() {
         responseElement.innerHTML = txt;
     }
 }
-
-/*
-// ----------------------------------------------------------------
-// imageResizeDiv - resizes grey enclosing div for image list to
-//                  size of screen (this is necessary so the inner
-//                  div can scroll
-// ----------------------------------------------------------------
-
-function imageResizeDiv() {
-    var imageDiv = document.getElementById(IMAGE_CONTENT_VIEW_ID);
-    imageDiv.style.maxHeight = (window.innerHeight - 32) + "px";
-    console.log(window.innerHeight - 32);
-}
-*/
