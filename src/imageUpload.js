@@ -6,7 +6,7 @@ var IMAGE_UPLOAD_INPUT_ID = "imageUploadInput";
 
 var IMAGE_LIST_ID = "imageUploadInfoListItemFrame";
 var IMAGE_CONTENT_VIEW_ID = "imageContentView";
-
+/*
 // MARK: - Global Variables
 // variables prefixed with "image" to avoid namespace collisions
 
@@ -18,7 +18,7 @@ var imageArray = [];
 
 // Array of filenames, to prevent duplicate importation
 var imageFilenameArray = [];
-
+*/
 // MARK: - Functions
 // Functions prefixed with "image" to avoid namespace collisions
 

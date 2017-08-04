@@ -24,7 +24,7 @@ var GOOGLE_MAPS_EMBED_API_KEY = "AIzaSyCkqZcICe7cCgvAI7bO7pFzNBOvBsvL1hU";
 var GOOGLE_MAPS_JAVASCRIPT_API_KEY = "AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU";
 
 // MARK: - Global Variables
-
+/*
 // Placeholder array for test metadata images
 var mapImgElements;
 
@@ -88,7 +88,7 @@ var clustObjArray; // NEWER
 
 // Flag to add new clusterObj
 var clustFlag; // NEWER
-
+*/
 // MARK: - Functions
 // Functions all prefixed with "map" to avoid namespace collisions
 
