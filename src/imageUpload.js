@@ -19,7 +19,7 @@ var imageArray = [];
 // Array of filenames, to prevent duplicate importation
 var imageFilenameArray = [];
 
-var mapLoadCompleteFlag = false;
+var mapLoadCompleteFlag = true;
 
 // MARK: - Functions
 // Functions prefixed with "image" to avoid namespace collisions
