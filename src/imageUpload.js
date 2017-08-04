@@ -113,7 +113,7 @@ function imageViewUnload() {
 
 function imageCreateListItem(fileName, fileSize) {
     return function(fileLoadedEvent) {
-        if (fileName == null || !imageFilenameArray.search(fileName) > -1) {
+        if (fileName == null || !imageFilenameArray.indexOf(fileName) > -1) {
             var imageLoadedObject = new Image();
             imageLoadedObject.src = fileLoadedEvent.target.result;
             imageArray.push(imageLoadedObject);
