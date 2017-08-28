@@ -55,6 +55,7 @@ var mapLoadCompleteFlag;
 // array of imgs
 var mapMarkImage; // NEW
 
+/*
 // Definition of cluster object class
 class imageObj {  // NEWER
     constructor(lat, lng, img) {
@@ -63,7 +64,13 @@ class imageObj {  // NEWER
         this.img = img;
     }
 };
+*/
 
+function newImageObj(lat, lng, img) {
+    return {"lat" : lat, "lng" : lng, "img" : img};
+}
+
+/*
 // Declaration of cluster object array class
 class clustObj { // NEWER
     constructor(imgobj) {
@@ -82,7 +89,24 @@ class clustObj { // NEWER
         this.arr.push(imgobj);
     }
 };
+*/
 
+function newClustObj(firstImgObj) { // NEWER
+    var clustObj = {};
+    clustObj.arr = [];
+    clustObj.arr.push(firstImgObj);
+    clustObj.avgLng = firstImgObj.lng;
+    clustObj.avgLat = firstImgObj.lat;
+    clustObj.sizeElem = 1.0;
+    clustObj.add = function(imgobj) {
+        this.avgLng = (this.avgLng * this.sizeElem) + imgobj.lng;
+        this.avgLat = (this.avgLat * this.sizeElem) + imgobj.lat;
+        this.sizeElem++;
+        this.avgLng = this.avgLng/this.sizeElem;
+        this.avgLat = this.avgLat/this.sizeElem;
+        this.arr.push(imgobj);
+    }
+}
 // Array of cluserObjs
 var clustObjArray = []; // NEWER
 
@@ -301,9 +325,9 @@ function mapReadImageMetadata(image) {
             mapCenter.lng = (mapCenter.lng * n + photoLocation.lng) / (n + 1.0);
             mapMarkerLocations.push(photoLocation);
 			mapMarkImage.push(this); // NEW
-            var newImgObj = new imageObj(photoLocation.lat, photoLocation.lng, this);
+            var newImgObj = newImageObj(photoLocation.lat, photoLocation.lng, this);
             if (clustObjArray.length === 0) { 
-                var newclustObj = new clustObj(newImgObj);
+                var newclustObj = newClustObj(newImgObj);
                 clustObjArray.push(newclustObj);
             }
             else { 
@@ -315,7 +339,7 @@ function mapReadImageMetadata(image) {
                     }
                 }
                 if (!clustFlag) {
-                    var newclustObj = new clustObj(newImgObj);
+                    var newclustObj = newClustObj(newImgObj);
                     clustObjArray.push(newclustObj);
                 }
             }
