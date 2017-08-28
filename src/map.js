@@ -62,7 +62,7 @@ class imageObj {  // NEWER
         this.lng = lng;
         this.img = img;
     }
-}
+};
 
 // Declaration of cluster object array class
 class clustObj { // NEWER
@@ -81,7 +81,7 @@ class clustObj { // NEWER
         this.avgLat = this.avgLat/this.sizeElem;
         this.arr.push(imgobj);
     }
-}
+};
 
 // Array of cluserObjs
 var clustObjArray = []; // NEWER
