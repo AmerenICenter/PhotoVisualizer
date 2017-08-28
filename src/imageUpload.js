@@ -11,13 +11,13 @@ var IMAGE_CONTENT_VIEW_ID = "imageContentView";
 // variables prefixed with "image" to avoid namespace collisions
 
 // Image upload completion flag
-window.imageUploadCompleteFlag = false;
+var imageUploadCompleteFlag = false;
 
 // Array to hold Javascript image objects
-window.imageArray = [];
+var imageArray = [];
 
 // Array of filenames, to prevent duplicate importation
-window.imageFilenameArray = [];
+var imageFilenameArray = [];
 
 // MARK: - Functions
 // Functions prefixed with "image" to avoid namespace collisions

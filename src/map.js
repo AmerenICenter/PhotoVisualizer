@@ -26,34 +26,34 @@ var GOOGLE_MAPS_JAVASCRIPT_API_KEY = "AIzaSyC0twG_7pvxb2WQKywvPnDGhCbZCbAUOmU";
 // MARK: - Global Variables
 
 // Placeholder array for test metadata images
-window.mapImgElements;
+var mapImgElements = null;
 
 // Counter for number of images examined
 // once it equals the size of the img array, execution continues
 // May not equal size of mapMarkerLocations, if some images
 // don't have location metadata
-window.mapImageProcessCounter;
+var mapImageProcessCounter;
 
 // Google map object
-window.map;
+var map;
 
 // Google geocoder object
-window.mapGeocoder;
+var mapGeocoder;
 
 // Center {lat, lng} object
-window.mapCenter;
+var mapCenter;
 
 // Google marker array
-window.mapMarkers;
+var mapMarkers;
 
 // {lat, lng} marker location object array
-window.mapMarkerLocations;
+var mapMarkerLocations;
 
 // Google Map load completion flag
-window.mapLoadCompleteFlag = false;
+var mapLoadCompleteFlag;
 
 // array of imgs
-window.mapMarkImage; // NEW
+var mapMarkImage; // NEW
 
 // Definition of cluster object class
 class imageObj {  // NEWER
@@ -84,10 +84,10 @@ class clustObj { // NEWER
 }
 
 // Array of cluserObjs
-window.clustObjArray; // NEWER
+var clustObjArray = []; // NEWER
 
 // Flag to add new clusterObj
-window.clustFlag; // NEWER
+var clustFlag = true; // NEWER
 
 // MARK: - Functions
 // Functions all prefixed with "map" to avoid namespace collisions
