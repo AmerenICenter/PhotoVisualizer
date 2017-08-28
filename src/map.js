@@ -106,6 +106,7 @@ function newClustObj(firstImgObj) { // NEWER
         this.avgLat = this.avgLat/this.sizeElem;
         this.arr.push(imgobj);
     }
+    return clustObj
 }
 // Array of cluserObjs
 var clustObjArray = []; // NEWER
