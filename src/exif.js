@@ -880,6 +880,7 @@
                             + 'xmlns:Iptc4xmpExt="http://iptc.org/std/Iptc4xmpExt/2008-02-29/" '
                             + xmpString.slice(indexOfXmp)
 
+                console.log("XMP String: " + xmpString);
                 var domDocument = dom.parseFromString( xmpString, 'text/xml' );
                 return xml2Object(domDocument);
             } else{
